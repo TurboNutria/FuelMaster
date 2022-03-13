@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21C5021h" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="biodieselPrice" optional="YES" attributeType="String"/>
+        <attribute name="bioEthanolPrice" optional="YES" attributeType="String"/>
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="cngPrice" optional="YES" attributeType="String"/>
+        <attribute name="distanceToUser" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="esterPercentage" optional="YES" attributeType="String"/>
+        <attribute name="ethanolPercentage" optional="YES" attributeType="String"/>
+        <attribute name="farmDieselPrice" optional="YES" attributeType="String"/>
+        <attribute name="latitude" optional="YES" attributeType="String"/>
+        <attribute name="lngPrice" optional="YES" attributeType="String"/>
+        <attribute name="longitude" optional="YES" attributeType="String"/>
+        <attribute name="lpgPrice" optional="YES" attributeType="String"/>
+        <attribute name="openingHours" optional="YES" attributeType="String"/>
+        <attribute name="owner" optional="YES" attributeType="String"/>
+        <attribute name="postalCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="premiumDieselPrice" optional="YES" attributeType="String"/>
+        <attribute name="premiumGasPrice" optional="YES" attributeType="String"/>
+        <attribute name="province" optional="YES" attributeType="String"/>
+        <attribute name="regularDieselPrice" optional="YES" attributeType="String"/>
+        <attribute name="regularGasPrice" optional="YES" attributeType="String"/>
+        <attribute name="superGasPrice" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Entity1" representedClassName="Entity1" syncable="YES" codeGenerationType="class"/>
+    <elements>
+        <element name="Entity" positionX="-63" positionY="-18" width="128" height="359"/>
+        <element name="Entity1" positionX="-54" positionY="153" width="128" height="29"/>
+    </elements>
+</model>

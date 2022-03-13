@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  FuelMaster
 //
-//  Created by Fernando Calle on 4/11/21.
+//  Created by Aura Silos on 4/11/21.
 //
 
 import UIKit
@@ -20,10 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        UserDefaults.standard.set(nil, forKey: "backgroundDate")
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -37,14 +34,78 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        if UserDefaults.standard.value(forKey: "gasType") as? String == nil {
+            
+            UserDefaults.standard.set("Gasolina", forKey: "gasType")
+        }
+        
+        
+        if let originalDate = UserDefaults.standard.value(forKey: "backgroundDate") as? Date {
+            
+            let currentDate = Date()
+            if DateInterval(start: originalDate, end: currentDate).duration >= Constants.OneDay {
+                
+                NotificationCenter.default.post(name: NSNotification.Name("refresh"), object: nil)
+                APIManager().getDataFromMinisty { output in
+                    
+                    var priceArray: [Double] = []
+                
+                    for element in ResponseData.shared.stationList {
+                        
+                        if let price = element.regularGasPrice,
+                           let priceDouble = Double(price.replacingOccurrences(of: ",", with: ".")),
+                           let province = element.province {
+                            
+                            if !province.uppercased().contains("TENERIFE") || !province.uppercased().contains("PALMAS") || !province.uppercased().contains("CEUTA") || !province.uppercased().contains("MELILLA") {
+
+                                priceArray.append(priceDouble)
+                            }
+                        }
+                    }
+                    
+                    let average = priceArray.reduce(0.0) {
+                        return $0 + $1/Double(priceArray.count)
+                    }
+                    
+                    let modList = ResponseData.shared.stationList.filter { element in
+                        
+                        if element.regularGasPrice != "" {
+                            
+                            if let priceDouble = Double(element.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) {
+                                
+                                if priceDouble <= average - 0.06 {
+                                    
+                                    return true
+                                } else {
+                                    
+                                    return false
+                                }
+                            } else {
+                                
+                                return false
+                            }
+                        } else {
+                            
+                            return false
+                        }
+                    }
+                    
+                    ResponseData.shared.average = average
+                    ResponseData.shared.regularList = ResponseData.shared.stationList
+                    ResponseData.shared.stationList.removeAll()
+                    ResponseData.shared.stationList = modList
+                    UserDefaults.standard.setValue(Date(), forKey: "backgroundDate")
+                    NotificationCenter.default.post(name: NSNotification.Name("foundData"), object: nil)
+                }
+            } else {
+                
+                NotificationCenter.default.post(name: NSNotification.Name("refresh"), object: nil)
+            }
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        UserDefaults.standard.set(Date(), forKey: "backgroundDate")
     }
 
 
