@@ -20,6 +20,10 @@ class PriceContainerCell: UITableViewCell, UICollectionViewDelegate, UICollectio
         let cellNib = UINib(nibName: "PriceDetailCell", bundle: nil)
         collectionView.register(cellNib, forCellWithReuseIdentifier: "PriceDetailCell")
     }
+    
+    func updateLists() {
+        collectionView.reloadData()
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

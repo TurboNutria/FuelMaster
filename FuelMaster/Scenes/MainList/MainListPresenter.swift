@@ -20,7 +20,7 @@ class MainListPresenter: APIManagerOutput {
     func viewDidLoad() {
         interactor.presenter = self
         
-        if !ResponseData.shared.stationList.isEmpty {
+        if !ResponseData.shared.regularList.isEmpty {
             
             self.foundData(data: ResponseData.shared)
         }
@@ -77,13 +77,13 @@ class MainListPresenter: APIManagerOutput {
     }
     
     func foundData(data: ResponseData?) {
-        if let d = data?.stationList {
+        if let d = data?.regularList {
             for i in d {
                 
                 sortedList.append(i)
                 
                 let distance = CLLocation.distance(from: (viewController?.locationManager?.location!.coordinate)! , to: CLLocationCoordinate2D(latitude: i.latitudeDouble, longitude: i.longitudeDouble))
-                let roundedValue = round((distance / 2000) * 200) / 200.0
+                let roundedValue = round((distance / 1000) * 100) / 100.0
                 sortedList[sortedList.endIndex - 1].distanceToUser = (roundedValue)
             }
         }

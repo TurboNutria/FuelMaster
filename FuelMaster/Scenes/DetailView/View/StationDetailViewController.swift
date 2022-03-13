@@ -11,6 +11,7 @@ import MapKit
 
 protocol StationDetialDelegate: AnyObject {
     func dismissDetailSheet()
+    func callToDeselect()
 }
 
 class StationDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DetailHeaderProtocol {
@@ -48,17 +49,35 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.register(titleHeaderNib, forHeaderFooterViewReuseIdentifier: "ListHeaderView")
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        self.dismiss(animated: true, completion: nil)
+        if let d = delegate {
+            d.callToDeselect()
+            d.dismissDetailSheet()
+        }
+    }
+    
     func updateStation() {
         
         self.title = self.station?.owner!
         self.navigationController?.title = self.station?.owner!
         self.navigationItem.title = self.station?.owner!
+         hasGas = false
+         hasDiesel = false
+         hasNaturalGas = false
+         gasIsConfigured = false
+         dieselIsConfigured = false
+         naturalGasIsConfigured = false
+         gasHeaderConfigured = false
+         dieselHeaderConfigured = false
+         naturalGasConfigured = false
+        self.tableView.reloadData()
     }
     
     @IBAction func tapClose(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
         if let d = delegate {
-            
+            d.callToDeselect()
             d.dismissDetailSheet()
         }
     }
@@ -141,6 +160,7 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
             }
             
             cell.pricesList = pricelist
+            cell.updateLists()
             gasIsConfigured = true
             return cell
         }
@@ -165,6 +185,7 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
             }
 
             cell.pricesList = pricelist
+            cell.updateLists()
             dieselIsConfigured = true
             return cell
         }
@@ -189,6 +210,7 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
             }
 
             cell.pricesList = pricelist
+            cell.updateLists()
             naturalGasIsConfigured = true
             return cell
         }

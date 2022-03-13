@@ -22,16 +22,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     var selectedPin: MKAnnotationView?
     var locationManager: CLLocationManager?
     var currentAnnotations: [MKAnnotation] = []
+    var selectStatus = false
 
     override func viewDidLoad() {
         self.map.alpha = 0.5
         self.map.isUserInteractionEnabled = false
+        self.map.userTrackingMode = .followWithHeading
         self.activityIndicator.startAnimating()
         self.activityIndicator.isHidden = false
         self.map.delegate = self
         self.title = "Mapa"
         self.parent?.navigationController?.navigationBar.prefersLargeTitles = false
-        self.parent?.navigationController?.navigationBar.barTintColor = .white
+        self.parent?.navigationController?.navigationBar.barTintColor = UIColor(named: "fontColor")
         self.parent?.navigationController?.navigationBar.backgroundColor = .clear
         
         NotificationCenter.default.addObserver(self, selector: #selector(dataFound), name: NSNotification.Name("foundData"), object: nil)
@@ -39,17 +41,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         NotificationCenter.default.addObserver(self, selector: #selector(updateMap), name: NSNotification.Name("update"), object: nil)
         let navButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), landscapeImagePhone: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(filterAction))
         self.navigationItem.rightBarButtonItem = navButton
-        //        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissDetailSheet))
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapOutside))
 //        self.map.addGestureRecognizer(tap)
         self.map.showsUserLocation = true
         locationManager = CLLocationManager()
         locationButton.addTarget(self, action: #selector(userPressedLocationButton), for: .touchUpInside)
         if locationManager?.authorizationStatus == .authorizedWhenInUse {
             
+            
             self.centerMapOnLocation(location: (locationManager?.location)!)
         }
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         let split = splitViewController as! SplitViewControllerManager
@@ -68,10 +70,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
             self.parent?.navigationController?.navigationBar.prefersLargeTitles = false
         }
         self.parent?.navigationController?.navigationBar.prefersLargeTitles = false
-        self.parent?.navigationController?.navigationBar.barTintColor = .white
+        self.parent?.navigationController?.navigationBar.barTintColor = UIColor(named: "fontColor")
         self.parent?.navigationController?.navigationBar.backgroundColor = .clear
     }
-    
     
     @objc func refreshMap() {
         if let originalDate = UserDefaults.standard.value(forKey: "backgroundDate") as? Date {
@@ -80,20 +81,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
             if DateInterval(start: originalDate, end: currentDate).duration >= Constants.OneDay {
                 DispatchQueue.main.async {
                     
-                    self.map.alpha = 0.5
-                    self.map.isUserInteractionEnabled = false
-                    self.activityIndicator.startAnimating()
+//                    self.map.alpha = 0.5
+//                    self.map.isUserInteractionEnabled = false
+//                    self.activityIndicator.startAnimating()
                 }
             } else {
                 
                 DispatchQueue.main.async {
-                    self.centerMapOnLocation(location: (self.locationManager?.location)!)
+//                    self.centerMapOnLocation(location: (self.locationManager?.location)!)
                 }
             }
         } else {
             
             DispatchQueue.main.async {
-                self.centerMapOnLocation(location: (self.locationManager?.location)!)
+//                self.centerMapOnLocation(location: (self.locationManager?.location)!)
             }
 
         }
@@ -144,50 +145,59 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         }
     }
     
+    func callToDeselect() {
+        self.map.deselectAnnotation(self.selectedPin?.annotation, animated: true)
+    }
+    
+    @objc func tapOutside() {
+        self.map.deselectAnnotation(self.selectedPin?.annotation, animated: true)
+//        self.dismissDetailSheet()
+    }
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation,
+           let title = annotation.title {
+            if !(title == "My Location") {
+                self.selectedPin = view
+                self.centerMapOnLocation(location: CLLocation(latitude: (view.annotation?.coordinate.latitude)! - 0.006, longitude: (view.annotation?.coordinate.longitude)!))
+                if let vc = self.detailView {
 
-            self.selectedPin = view
-            self.centerMapOnLocation(location: CLLocation(latitude: (view.annotation?.coordinate.latitude)! - 0.006, longitude: (view.annotation?.coordinate.longitude)!))
-            if let vc = self.detailView {
-                
-                self.configureDetailSheet(vc: vc.parent!, source: view)
-                let station = ResponseData.shared.stationList.filter { data in
-                        
-                    return data.address == view.annotation?.subtitle
-                }
-                vc.station = station.first
-                vc.updateStation()
-            } else {
-                
-                let vcN = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailViewNav") as! UINavigationController
-                let vc = vcN.viewControllers.first as! StationDetailViewController
-                
-                self.configureDetailSheet(vc: vcN, source: view)
-                vc.title = view.annotation?.title!
-                vc.titleLabel = (view.annotation?.title!)!
-                vc.navigationItem.title = view.annotation?.title!
-                self.detailView = vc
-                vc.delegate = self
-                let station = ResponseData.shared.stationList.filter { data in
+                    self.configureDetailSheet(vc: vc.parent!, source: view)
+                    let station = ResponseData.shared.stationList.filter { data in
+                            
+                        return data.address == view.annotation?.subtitle
+                    }
+                    vc.station = station.first
+                    vc.updateStation()
+                } else {
+                    let vcN = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailViewNav") as! UINavigationController
+                    let vc = vcN.viewControllers.first as! StationDetailViewController
                     
-                    return data.address == view.annotation?.subtitle
+                    self.configureDetailSheet(vc: vcN, source: view)
+                    vc.title = view.annotation?.title!
+                    vc.titleLabel = (view.annotation?.title!)!
+                    vc.navigationItem.title = view.annotation?.title!
+                    self.detailView = vc
+                    vc.delegate = self
+                    let station = ResponseData.shared.stationList.filter { data in
+                        
+                        return data.address == view.annotation?.subtitle
+                    }
+                    vc.station = station.first
+                    present(vcN, animated: true, completion: nil)
                 }
-                vc.station = station.first
-                present(vcN, animated: true, completion: nil)
             }
-
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
+        var annotationView: MKMarkerAnnotationView? = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
         let station = ResponseData.shared.stationList.filter { data in
-                
             return data.address == annotation.subtitle
         }
-        
         if let stationData = station.first {
             
-            annotationView.glyphImage = UIImage(systemName: "fuelpump.circle")
+            annotationView?.glyphImage = UIImage(systemName: "fuelpump.circle")
             
             if let price = stationData.regularGasPrice {
                 
@@ -195,27 +205,32 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
                     
                     if priceInt <= ResponseData.shared.average - 0.06 {
                         
-                        annotationView.markerTintColor = UIColor(red: (51.0/255), green: (161.0/255), blue: (79.0/255), alpha: 1.0)
+                        annotationView?.markerTintColor = UIColor(red: (51.0/255), green: (161.0/255), blue: (79.0/255), alpha: 1.0)
 
                     } else if priceInt >= ResponseData.shared.average - 0.05 && priceInt <= ResponseData.shared.average + 0.05 {
                         
-                        annotationView.markerTintColor = UIColor(red: (249.0/255), green: (126.0/255), blue: (43.0/255), alpha: 1.0)
+                        annotationView?.markerTintColor = UIColor(red: (249.0/255), green: (126.0/255), blue: (43.0/255), alpha: 1.0)
 
                     } else {
                         
-                        annotationView.markerTintColor = UIColor(red: (247.0/255), green: (75.0/255), blue: (36.0/255), alpha: 1.0)
+                        annotationView?.markerTintColor = UIColor(red: (247.0/255), green: (75.0/255), blue: (36.0/255), alpha: 1.0)
 
                     }
                 }
             } else {
                 
-                annotationView.markerTintColor = UIColor.gray
+                annotationView?.markerTintColor = UIColor.gray
                 
                 }
             } else {
                 
-                annotationView.markerTintColor = UIColor.gray
+                annotationView?.markerTintColor = UIColor.gray
             }
+        if annotation.title == "My Location" {
+            print("user location found")
+            annotationView = nil
+        }
+
         return annotationView
     }
 

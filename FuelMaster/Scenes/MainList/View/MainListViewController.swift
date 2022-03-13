@@ -274,6 +274,10 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
 }
 
 extension MainListViewController: StationDetialDelegate {
+    func callToDeselect() {
+        
+    }
+    
     func dismissDetailSheet() {
         self.tableView.reloadData()
     }
