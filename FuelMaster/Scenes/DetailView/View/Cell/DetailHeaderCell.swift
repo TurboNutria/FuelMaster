@@ -25,6 +25,7 @@ class DetailHeaderCell: UITableViewCell {
         mapButton.setTitleColor(UIColor(named:"fontColor"), for: .normal)
         mapButton.layer.borderColor = UIColor(named:"borderColor")!.cgColor
         mapButton.layer.cornerRadius = mapButton.frame.height / 2
+        self.ownerImage.layer.cornerRadius = self.ownerImage.layer.frame.height / 2
         mapButton.layer.borderWidth = 2.0
     }
 

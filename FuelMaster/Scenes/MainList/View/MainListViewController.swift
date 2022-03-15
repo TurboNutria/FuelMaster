@@ -49,8 +49,9 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
     }
     
     @objc func sortData() {
-        
-        self.presenter.viewDidLoad()
+        DispatchQueue.main.async {
+            self.presenter.viewDidLoad()
+        }
     }
     
     func foundData(data: [StationData]?) {
@@ -133,6 +134,29 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
                 
                 cell.distanceLabel.text = String(list[indexPath.row].distanceToUser!).replacingOccurrences(of: ".", with: ",") + " km"
                 cell.stationName.text = list[indexPath.row].owner!
+                if let ownerName = list[indexPath.row].owner {
+                    
+                    let ownerString = Constants.ownersList.filter { owner in
+                        return ownerName.contains(owner)
+                    }
+                    if ownerString.count > 0 {
+                        
+                        if let image = UIImage(named: ownerString.first!) {
+                            
+                            cell.ownerImage.image = image
+                        } else {
+                            
+                            cell.ownerImage.image = UIImage(systemName: "fuelpump.circle")
+                        }
+                    } else {
+                        
+                        cell.ownerImage.image = UIImage(systemName: "fuelpump.circle")
+                    }
+                } else {
+                    
+                    cell.ownerImage.image = UIImage(systemName: "fuelpump.circle")
+                }
+
                 if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
                 let gasCase = GasType(rawValue: gasType) {
                     switch gasCase {
@@ -243,7 +267,26 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
                 cell.reloadCollection()
             } else {
                 
-                cell.stationList = []
+                if UserDefaults.standard.array(forKey: "favList") != nil {
+                    if let favList = UserDefaults.standard.array(forKey: "favList") as? [Int] {
+                        
+                        for i in favList {
+                           let favStation = ResponseData.shared.regularList.filter { data in
+                                return data.IDEESS == String(i)
+                            }
+                            
+                            if favStation.count > 0 {
+                                
+                                if let station = favStation.first {
+                                    
+                                    FavList.shared.stationList.append(station)
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                cell.stationList = FavList.shared.stationList
                 cell.reloadCollection()
             }
             return cell

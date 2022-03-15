@@ -84,7 +84,7 @@ class MainListPresenter: APIManagerOutput {
         if let d = data?.regularList {
             for i in d {
                 
-                if viewController?.locationManager?.authorizationStatus == .authorizedWhenInUse {
+                if viewController?.locationManager?.authorizationStatus == .authorizedWhenInUse || viewController?.locationManager?.authorizationStatus == .authorizedAlways {
                  
                     if let vC = viewController,
                        let lM = vC.locationManager,

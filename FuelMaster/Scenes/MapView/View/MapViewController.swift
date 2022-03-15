@@ -141,19 +141,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     }
     
     @objc func dataFound() {
+        DispatchQueue.main.async {
+
         let manager = APIManager()
-        let status = locationManager?.authorizationStatus
+            let status = self.locationManager?.authorizationStatus
         print(status!.rawValue)
         if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
             manager.userLocation = self.locationManager?.location
             manager.changeMainList()
-            self.centerMapOnLocation(location: (locationManager?.location)!)
+            self.centerMapOnLocation(location: (self.locationManager?.location)!)
         } else if status == .denied {
             manager.userLocation = CLLocation(latitude: 40.4165000, longitude: -3.7025600)
             manager.changeMainList()
             self.centerMapOnLocation(location: CLLocation(latitude: 40.4165000, longitude: -3.7025600))
         } else {
-        }
+        }}
     }
     
     func callToDeselect() {

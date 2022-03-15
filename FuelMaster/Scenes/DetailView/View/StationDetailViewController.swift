@@ -93,12 +93,27 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
             if let stationOwner = station,
                let ownerName = stationOwner.owner {
                 
-                if ownerName.uppercased().contains("BALLENOIL") {
-                    
-                    cell.ownerImage.image = UIImage(named: "ballenoil")
+                let ownerString = Constants.ownersList.filter { owner in
+                    return ownerName.contains(owner)
                 }
+                if ownerString.count > 0 {
+                    
+                    if let image = UIImage(named: ownerString.first!) {
+                        
+                        cell.ownerImage.image = image
+                    } else {
+                        
+                        cell.ownerImage.image = UIImage(systemName: "fuelpump.circle")
+                    }
+                } else {
+                    
+                    cell.ownerImage.image = UIImage(systemName: "fuelpump.circle")
+                }
+            } else {
+                
+                cell.ownerImage.image = UIImage(systemName: "fuelpump.circle")
             }
-            
+
             return cell
         } else if indexPath.section == tableView.numberOfSections - 2 {
             
@@ -625,13 +640,39 @@ extension StationDetailViewController: detailFooterDelegate {
                     data.address == self.station?.address
                 }
                 
+                var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                addedArray.removeAll { element in
+                    return element == Int((self.station?.IDEESS!)!)!
+                }
+                
+                UserDefaults.standard.set(addedArray, forKey: "favList")
             } else {
                 
                 FavList.shared.stationList.append(self.station!)
+                if UserDefaults.standard.array(forKey: "favList") != nil {
+                    
+                    var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                    addedArray.append(Int((self.station?.IDEESS!)!)!)
+                    UserDefaults.standard.set(addedArray, forKey: "favList")
+                } else {
+                    
+                    let idArray: [Int] = [Int((self.station?.IDEESS!)!)!]
+                    UserDefaults.standard.set(idArray, forKey: "favList")
+                }
             }
         } else {
             
             FavList.shared.stationList.append(self.station!)
+            if UserDefaults.standard.string(forKey: "favList") != nil {
+                
+                var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                addedArray.append(Int((self.station?.IDEESS!)!)!)
+                UserDefaults.standard.set(addedArray, forKey: "favList")
+            } else {
+                
+                let idArray: [Int] = [Int((self.station?.IDEESS!)!)!]
+                UserDefaults.standard.set(idArray, forKey: "favList")
+            }
         }
     }
     

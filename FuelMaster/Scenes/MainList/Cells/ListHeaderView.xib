@@ -22,6 +22,7 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztx-Kd-s7t">
                     <rect key="frame" x="156" y="29" width="77" height="31"/>
+                    <color key="tintColor" name="fontColor"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Ordenar"/>
                 </button>

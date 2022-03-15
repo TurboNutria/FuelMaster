@@ -78,6 +78,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DXt-hl-ypO">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="fontColor"/>
                     </navigationBar>
                     <connections>
                         <segue destination="sO5-qw-J9e" kind="relationship" relationship="rootViewController" id="3n0-c1-0Zl"/>
@@ -113,6 +114,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Filtros" id="xeG-D0-X32">
                         <barButtonItem key="leftBarButtonItem" title="Cerrar" id="ThQ-Bn-Tko">
+                            <color key="tintColor" name="fontColor"/>
                             <connections>
                                 <action selector="closeAction:" destination="sO5-qw-J9e" id="07b-rw-7M4"/>
                             </connections>
@@ -150,6 +152,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Repsol" id="yXr-H8-bmZ">
                         <barButtonItem key="leftBarButtonItem" title="Cerrar" id="rHC-oI-xuY">
+                            <color key="tintColor" name="fontColor"/>
                             <connections>
                                 <action selector="tapClose:" destination="fDg-9N-FCK" id="kpO-y7-sfd"/>
                             </connections>
@@ -228,6 +231,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Configuración" id="J9t-Kx-Da3">
                         <barButtonItem key="leftBarButtonItem" title="Cerrar" id="5Qx-vS-D9W">
+                            <color key="tintColor" name="fontColor"/>
                             <connections>
                                 <action selector="closeAction:" destination="lwa-wq-egg" id="EOv-uR-IFN"/>
                             </connections>
@@ -279,6 +283,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" name="headerColor"/>
+                        <color key="tintColor" name="fontColor"/>
+                        <color key="barTintColor" name="fontColor"/>
                     </navigationBar>
                     <connections>
                         <segue destination="lwa-wq-egg" kind="relationship" relationship="rootViewController" id="lbq-xC-jss"/>
