@@ -31,6 +31,7 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
         self.navigationController?.navigationBar.prefersLargeTitles = true 
         NotificationCenter.default.addObserver(self, selector: #selector(sortData), name: NSNotification.Name("foundData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sortData), name: NSNotification.Name("refresh"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sortData), name: NSNotification.Name("update"), object: nil)
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         searchBar.delegate = self
@@ -132,26 +133,95 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
                 
                 cell.distanceLabel.text = String(list[indexPath.row].distanceToUser!).replacingOccurrences(of: ".", with: ",") + " km"
                 cell.stationName.text = list[indexPath.row].owner!
-                
-                if let regGasPrice = list[indexPath.row].regularGasPrice {
-                    
-                    if regGasPrice == "" {
+                if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+                let gasCase = GasType(rawValue: gasType) {
+                    switch gasCase {
+                    case .diesel:
+                        if let regGasPrice = list[indexPath.row].regularDieselPrice {
+                            
+                            if regGasPrice == "" {
+                                
+                                cell.regularGasLabel.text = "Diésel    -,---€"
+                            } else {
+                                
+                                cell.regularGasLabel.text = "Diésel    " +  regGasPrice + "€"
+                            }
+                        }
                         
-                        cell.regularGasLabel.text = "Gasolina 95    -,---€"
-                    } else {
+                        if let plusGasPrice = list[indexPath.row].premiumDieselPrice {
+                            
+                            if plusGasPrice == "" {
+                                
+                                cell.superGasLabel.text = "Diésel Premium    -,---€"
+                            } else {
+                                
+                                cell.superGasLabel.text = "Diésel Premium    " + plusGasPrice + "€"
+                            }
+                        }
+
+                    case .gasoline:
+                        if let regGasPrice = list[indexPath.row].regularGasPrice {
+                            
+                            if regGasPrice == "" {
+                                
+                                cell.regularGasLabel.text = "Gasolina 95    -,---€"
+                            } else {
+                                
+                                cell.regularGasLabel.text = "Gasolina 95    " +  regGasPrice + "€"
+                            }
+                        }
                         
-                        cell.regularGasLabel.text = "Gasolina 95    " +  regGasPrice + "€"
-                    }
-                }
-                
-                if let plusGasPrice = list[indexPath.row].superGasPrice {
-                    
-                    if plusGasPrice == "" {
+                        if let plusGasPrice = list[indexPath.row].superGasPrice {
+                            
+                            if plusGasPrice == "" {
+                                
+                                cell.superGasLabel.text = "Gasolina 98    -,---€"
+                            } else {
+                                
+                                cell.superGasLabel.text = "Gasolina 98    " + plusGasPrice + "€"
+                            }
+                        }
+                    case .lpg:
+                        if let regGasPrice = list[indexPath.row].lpgPrice {
+                            
+                            if regGasPrice == "" {
+                                
+                                cell.regularGasLabel.text = "GLP    -,---€"
+                            } else {
+                                
+                                cell.regularGasLabel.text = "GLP    " +  regGasPrice + "€"
+                            }
+                        }
                         
-                        cell.superGasLabel.text = "Gasolina 98    -,---€"
-                    } else {
+                        cell.superGasLabel.text = ""
+
+                    case .cng:
+                        if let regGasPrice = list[indexPath.row].cngPrice {
+                            
+                            if regGasPrice == "" {
+                                
+                                cell.regularGasLabel.text = "GNC    -,---€"
+                            } else {
+                                
+                                cell.regularGasLabel.text = "GNC    " +  regGasPrice + "€"
+                            }
+                        }
                         
-                        cell.superGasLabel.text = "Gasolina 98    " + plusGasPrice + "€"
+                        cell.superGasLabel.text = ""
+
+                    case .lng:
+                        if let regGasPrice = list[indexPath.row].lngPrice {
+                            
+                            if regGasPrice == "" {
+                                
+                                cell.regularGasLabel.text = "GNL    -,---€"
+                            } else {
+                                
+                                cell.regularGasLabel.text = "GNL    " +  regGasPrice + "€"
+                            }
+                        }
+                        
+                        cell.superGasLabel.text = ""
                     }
                 }
             }

@@ -135,84 +135,253 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func configurePriceCell(cell: PriceContainerCell) -> PriceContainerCell {
-        if hasGas && !gasIsConfigured {
-            
-            var pricelist: [PriceModel] = []
-            
-            if station?.regularGasPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.regularGasPrice, name: "95"))
-            }
-            
-            if station?.superGasPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.superGasPrice, name: "98"))
-            }
+        if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+        let gasCase = GasType(rawValue: gasType) {
+            switch gasCase {
+            case .diesel:
+                if hasDiesel && !dieselIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.regularDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.regularDieselPrice, name: "Normal"))
+                    }
+                    
+                    if station?.premiumDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.premiumDieselPrice, name: "Premium"))
+                    }
 
-            if station?.premiumGasPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.premiumGasPrice, name: "95+"))
-            }
+                    if station?.bioDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.bioDieselPrice, name: "Bio"))
+                    }
 
-            if station?.bioEthanolPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.bioEthanolPrice, name: "Bio"))
-            }
-            
-            cell.pricesList = pricelist
-            cell.updateLists()
-            gasIsConfigured = true
-            return cell
-        }
-        
-        if hasDiesel && !dieselIsConfigured {
-            
-            var pricelist: [PriceModel] = []
-            
-            if station?.regularDieselPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.regularDieselPrice, name: "Normal"))
-            }
-            
-            if station?.premiumDieselPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.premiumDieselPrice, name: "Premium"))
-            }
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    dieselIsConfigured = true
+                    return cell
+                }
 
-            if station?.bioDieselPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.bioDieselPrice, name: "Bio"))
-            }
+                if hasGas && !gasIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.regularGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.regularGasPrice, name: "95"))
+                    }
+                    
+                    if station?.superGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.superGasPrice, name: "98"))
+                    }
 
-            cell.pricesList = pricelist
-            cell.updateLists()
-            dieselIsConfigured = true
-            return cell
-        }
-        
-        if hasNaturalGas && !naturalGasIsConfigured {
-            
-            var pricelist: [PriceModel] = []
-            
-            if station?.cngPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.cngPrice, name: "GNC"))
-            }
-            
-            if station?.lpgPrice != "" {
-                
-                pricelist.append(PriceModel(price: station?.lpgPrice, name: "GLP"))
-            }
+                    if station?.premiumGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.premiumGasPrice, name: "95+"))
+                    }
 
-            if station?.lngPrice != "" {
+                    if station?.bioEthanolPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.bioEthanolPrice, name: "Bio"))
+                    }
+                    
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    gasIsConfigured = true
+                    return cell
+                }
                 
-                pricelist.append(PriceModel(price: station?.lngPrice, name: "GNL"))
-            }
+                
+                if hasNaturalGas && !naturalGasIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.cngPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.cngPrice, name: "GNC"))
+                    }
+                    
+                    if station?.lpgPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.lpgPrice, name: "GLP"))
+                    }
 
-            cell.pricesList = pricelist
-            cell.updateLists()
-            naturalGasIsConfigured = true
-            return cell
+                    if station?.lngPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.lngPrice, name: "GNL"))
+                    }
+
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    naturalGasIsConfigured = true
+                    return cell
+                }
+
+            case .gasoline:
+                if hasGas && !gasIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.regularGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.regularGasPrice, name: "95"))
+                    }
+                    
+                    if station?.superGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.superGasPrice, name: "98"))
+                    }
+
+                    if station?.premiumGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.premiumGasPrice, name: "95+"))
+                    }
+
+                    if station?.bioEthanolPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.bioEthanolPrice, name: "Bio"))
+                    }
+                    
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    gasIsConfigured = true
+                    return cell
+                }
+
+                if hasDiesel && !dieselIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.regularDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.regularDieselPrice, name: "Normal"))
+                    }
+                    
+                    if station?.premiumDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.premiumDieselPrice, name: "Premium"))
+                    }
+
+                    if station?.bioDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.bioDieselPrice, name: "Bio"))
+                    }
+
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    dieselIsConfigured = true
+                    return cell
+                }
+                
+                if hasNaturalGas && !naturalGasIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.cngPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.cngPrice, name: "GNC"))
+                    }
+                    
+                    if station?.lpgPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.lpgPrice, name: "GLP"))
+                    }
+
+                    if station?.lngPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.lngPrice, name: "GNL"))
+                    }
+
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    naturalGasIsConfigured = true
+                    return cell
+                }
+
+            case .lpg, .cng, .lng:
+                if hasNaturalGas && !naturalGasIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.cngPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.cngPrice, name: "GNC"))
+                    }
+                    
+                    if station?.lpgPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.lpgPrice, name: "GLP"))
+                    }
+
+                    if station?.lngPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.lngPrice, name: "GNL"))
+                    }
+
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    naturalGasIsConfigured = true
+                    return cell
+                }
+
+                if hasDiesel && !dieselIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.regularDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.regularDieselPrice, name: "Normal"))
+                    }
+                    
+                    if station?.premiumDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.premiumDieselPrice, name: "Premium"))
+                    }
+
+                    if station?.bioDieselPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.bioDieselPrice, name: "Bio"))
+                    }
+
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    dieselIsConfigured = true
+                    return cell
+                }
+
+                if hasGas && !gasIsConfigured {
+                    
+                    var pricelist: [PriceModel] = []
+                    
+                    if station?.regularGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.regularGasPrice, name: "95"))
+                    }
+                    
+                    if station?.superGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.superGasPrice, name: "98"))
+                    }
+
+                    if station?.premiumGasPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.premiumGasPrice, name: "95+"))
+                    }
+
+                    if station?.bioEthanolPrice != "" {
+                        
+                        pricelist.append(PriceModel(price: station?.bioEthanolPrice, name: "Bio"))
+                    }
+                    
+                    cell.pricesList = pricelist
+                    cell.updateLists()
+                    gasIsConfigured = true
+                    return cell
+                }
+            }
         }
         
         return cell
@@ -272,28 +441,88 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func configureHeader(header: ListHeaderView) -> ListHeaderView {
-        if hasGas && !gasHeaderConfigured {
-            
-            header.titleLabel.text = "Gasolina"
-            header.sortButton.isHidden = true
-            gasHeaderConfigured = true
-            return header
-        }
-        
-        if hasDiesel && !dieselHeaderConfigured {
-            
-            header.titleLabel.text = "Diésel"
-            header.sortButton.isHidden = true
-            dieselHeaderConfigured = true
-            return header
-        }
-        
-        if hasNaturalGas && !naturalGasConfigured {
-            
-            header.titleLabel.text = "Gas"
-            header.sortButton.isHidden = true
-            naturalGasConfigured = true
-            return header
+        if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+        let gasCase = GasType(rawValue: gasType) {
+            switch gasCase {
+            case .diesel:
+                if hasDiesel && !dieselHeaderConfigured {
+                    
+                    header.titleLabel.text = "Diésel"
+                    header.sortButton.isHidden = true
+                    dieselHeaderConfigured = true
+                    return header
+                }
+
+                if hasGas && !gasHeaderConfigured {
+                    
+                    header.titleLabel.text = "Gasolina"
+                    header.sortButton.isHidden = true
+                    gasHeaderConfigured = true
+                    return header
+                }
+                
+                
+                if hasNaturalGas && !naturalGasConfigured {
+                    
+                    header.titleLabel.text = "Gas"
+                    header.sortButton.isHidden = true
+                    naturalGasConfigured = true
+                    return header
+                }
+
+            case .gasoline:
+                if hasGas && !gasHeaderConfigured {
+                    
+                    header.titleLabel.text = "Gasolina"
+                    header.sortButton.isHidden = true
+                    gasHeaderConfigured = true
+                    return header
+                }
+
+                if hasDiesel && !dieselHeaderConfigured {
+                    
+                    header.titleLabel.text = "Diésel"
+                    header.sortButton.isHidden = true
+                    dieselHeaderConfigured = true
+                    return header
+                }
+
+                if hasNaturalGas && !naturalGasConfigured {
+                    
+                    header.titleLabel.text = "Gas"
+                    header.sortButton.isHidden = true
+                    naturalGasConfigured = true
+                    return header
+                }
+
+            case .cng, .lng, .lpg:
+                if hasNaturalGas && !naturalGasConfigured {
+                    
+                    header.titleLabel.text = "Gas"
+                    header.sortButton.isHidden = true
+                    naturalGasConfigured = true
+                    return header
+                }
+
+                if hasDiesel && !dieselHeaderConfigured {
+                    
+                    header.titleLabel.text = "Diésel"
+                    header.sortButton.isHidden = true
+                    dieselHeaderConfigured = true
+                    return header
+                }
+
+                if hasGas && !gasHeaderConfigured {
+                    
+                    header.titleLabel.text = "Gasolina"
+                    header.sortButton.isHidden = true
+                    gasHeaderConfigured = true
+                    return header
+                }
+                
+                
+
+            }
         }
         
         return header
@@ -304,22 +533,69 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
         var sectionCount = 3
         
         if let s = station {
-            if !s.superGasPrice!.isEmpty || !s.premiumGasPrice!.isEmpty || !s.regularGasPrice!.isEmpty || !s.bioEthanolPrice!.isEmpty {
-                
-                sectionCount += 1
-                hasGas = true
-            }
-            
-            if !s.regularDieselPrice!.isEmpty || !s.premiumDieselPrice!.isEmpty || !s.bioDieselPrice!.isEmpty {
-                
-                sectionCount += 1
-                hasDiesel = true
-            }
-            
-            if !s.lpgPrice!.isEmpty || !s.lngPrice!.isEmpty || !s.cngPrice!.isEmpty {
-                
-                sectionCount += 1
-                hasNaturalGas = true
+            if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+            let gasCase = GasType(rawValue: gasType) {
+                switch gasCase {
+                case .diesel:
+                    if !s.regularDieselPrice!.isEmpty || !s.premiumDieselPrice!.isEmpty || !s.bioDieselPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasDiesel = true
+                    }
+
+                    if !s.superGasPrice!.isEmpty || !s.premiumGasPrice!.isEmpty || !s.regularGasPrice!.isEmpty || !s.bioEthanolPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasGas = true
+                    }
+                    
+                    
+                    if !s.lpgPrice!.isEmpty || !s.lngPrice!.isEmpty || !s.cngPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasNaturalGas = true
+                    }
+
+                case .gasoline:
+                    if !s.superGasPrice!.isEmpty || !s.premiumGasPrice!.isEmpty || !s.regularGasPrice!.isEmpty || !s.bioEthanolPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasGas = true
+                    }
+                    
+                    if !s.regularDieselPrice!.isEmpty || !s.premiumDieselPrice!.isEmpty || !s.bioDieselPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasDiesel = true
+                    }
+                    
+                    if !s.lpgPrice!.isEmpty || !s.lngPrice!.isEmpty || !s.cngPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasNaturalGas = true
+                    }
+
+                case .cng, .lng, .lpg:
+                    if !s.lpgPrice!.isEmpty || !s.lngPrice!.isEmpty || !s.cngPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasNaturalGas = true
+
+                    if !s.superGasPrice!.isEmpty || !s.premiumGasPrice!.isEmpty || !s.regularGasPrice!.isEmpty || !s.bioEthanolPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasGas = true
+                    }
+                    
+                    if !s.regularDieselPrice!.isEmpty || !s.premiumDieselPrice!.isEmpty || !s.bioDieselPrice!.isEmpty {
+                        
+                        sectionCount += 1
+                        hasDiesel = true
+                    }
+                    
+                    }
+
+                }
             }
         }
         

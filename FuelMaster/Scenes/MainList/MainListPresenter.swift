@@ -18,6 +18,10 @@ class MainListPresenter: APIManagerOutput {
     var currentList: [StationData] = []
     
     func viewDidLoad() {
+        self.sortedList.removeAll()
+        self.sortedByDistance.removeAll()
+        self.sortedByPrice.removeAll()
+        self.currentList.removeAll()
         interactor.presenter = self
         
         if !ResponseData.shared.regularList.isEmpty {
@@ -80,13 +84,13 @@ class MainListPresenter: APIManagerOutput {
         if let d = data?.regularList {
             for i in d {
                 
-                sortedList.append(i)
                 if viewController?.locationManager?.authorizationStatus == .authorizedWhenInUse {
                  
                     if let vC = viewController,
                        let lM = vC.locationManager,
                        let location = lM.location {
                         
+                        sortedList.append(i)
                         let distance = CLLocation.distance(from: location.coordinate , to: CLLocationCoordinate2D(latitude: i.latitudeDouble, longitude: i.longitudeDouble))
                         let roundedValue = round((distance / 1000) * 100) / 100.0
                         sortedList[sortedList.endIndex - 1].distanceToUser = (roundedValue)
@@ -101,7 +105,24 @@ class MainListPresenter: APIManagerOutput {
         
         self.currentList = sortedByPrice.filter { data in
             
-            return data.regularGasPrice! != ""
+            if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+            let gasCase = GasType(rawValue: gasType) {
+                switch gasCase {
+                case .diesel:
+                    return data.regularDieselPrice! != ""
+                case .gasoline:
+                    return data.regularGasPrice! != ""
+                case .lpg:
+                    return data.lpgPrice! != ""
+                case .cng:
+                    return data.cngPrice! != ""
+                case .lng:
+                    return data.lngPrice! != ""
+                }
+            } else {
+                
+                return data.regularGasPrice! != ""
+            }
         }
         
         self.viewController?.foundData(data: currentList)
@@ -134,7 +155,28 @@ class MainListPresenter: APIManagerOutput {
     func sortByprice(list: [StationData]) -> [StationData] {
         let sortedByPrice = list.sorted {
                     
-            return Double($0.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0 < Double($1.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+            if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+            let gasCase = GasType(rawValue: gasType) {
+                switch gasCase {
+                case .diesel:
+                    return Double($0.regularDieselPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0 < Double($1.regularDieselPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+
+                case .gasoline:
+                    return Double($0.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0 < Double($1.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+
+                case .lpg:
+                    return Double($0.lpgPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0 < Double($1.lpgPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+
+                case .cng:
+                    return Double($0.cngPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0 < Double($1.cngPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+
+                case .lng:
+                    return Double($0.lngPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0 < Double($1.lngPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+                }
+            } else {
+                
+                return Double($0.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0 < Double($1.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+            }
         }
         
         return sortedByPrice

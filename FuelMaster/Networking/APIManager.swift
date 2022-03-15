@@ -38,6 +38,7 @@ class APIManager {
                             if placemark.count > 0 {
                                 
                                 self.placemarkData = placemark[0]
+                                self.recalculateAverage()
                                 let average = ResponseData.shared.average
                                 
                                 let currentValue = (Constants.filtersList.first { element in
@@ -45,68 +46,68 @@ class APIManager {
                                 })?.priceType
                                 
                                 let modList = ResponseData.shared.regularList.filter { element in
-                                    
-                                    if element.regularGasPrice != "" {
+                                    if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+                                    let gasCase = GasType(rawValue: gasType) {
                                         
-                                        if let priceDouble = Double(element.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) {
+                                        switch gasCase {
+                                        case .diesel:
+                                            if element.regularDieselPrice != "" {
+                                                
+                                                return self.changeFilterType(element: element.regularDieselPrice ?? "0,0", oProvince: element.province, currentValue: currentValue ?? .all, average: average)
+                                            } else {
+                                                
+                                                return false
+                                            }
+                                        case .gasoline:
+                                            if element.regularGasPrice != "" {
+                                                
+                                                return self.changeFilterType(element: element.regularGasPrice ?? "0,0", oProvince: element.province, currentValue: currentValue ?? .all, average: average)
+                                            } else {
+                                                
+                                                return false
+                                            }
+                                        case .lpg:
+                                            if element.lpgPrice != "" {
+                                                
+                                                return self.changeFilterType(element: element.lpgPrice ?? "0,0", oProvince: element.province, currentValue: currentValue ?? .all, average: average)
+                                            } else {
+                                                
+                                                return false
+                                            }
+                                        case .cng:
+                                            if element.cngPrice != "" {
+                                                
+                                                return self.changeFilterType(element: element.cngPrice ?? "0,0", oProvince: element.province, currentValue: currentValue ?? .all, average: average)
+                                            } else {
+                                                
+                                                return false
+                                            }
+                                        case .lng:
+                                            if element.lngPrice != "" {
+                                                
+                                                return self.changeFilterType(element: element.lngPrice ?? "0,0", oProvince: element.province, currentValue: currentValue ?? .all, average: average)
+                                            } else {
+                                                
+                                                return false
+                                            }
+                                        }
+                                    } else {
+                                        
+                                        if let province = element.province,
+                                           let placermark = self.placemarkData,
+                                           let userProvince = placermark.administrativeArea {
                                             
-                                            switch currentValue {
-                                            case .cheap:
-                                                if priceDouble <= average - 0.06 {
-                                                    
-                                                    return true
-                                                } else {
-                                                    
-                                                    return false
-                                                }
-                                            case .regular:
-                                                if priceDouble > average - 0.06 && priceDouble < average + 0.06 {
-                                                    
-                                                    return true
-                                                } else {
-                                                    
-                                                    return false
-                                                }
-                                            case .expensice:
-                                                if priceDouble >= average + 0.06 {
-                                                    
-                                                    return true
-                                                } else {
-                                                    
-                                                    return false
-                                                }
-                                            case .all:
-                                                if let province = element.province,
-                                                   let placermark = self.placemarkData,
-                                                   let userProvince = placermark.administrativeArea {
-                                                    
-                                                    if province.contains(self.verifyProvince(userProvince).uppercased()) {
-                                                        
-                                                        return true
-                                                    } else {
-                                                        
-                                                        return false
-                                                    }
-                                                } else {
-                                                    
-                                                    return false
-                                                }
-                                            case .none:
-                                                if priceDouble <= average - 0.06 {
-                                                    
-                                                    return true
-                                                } else {
-                                                    
-                                                    return false
-                                                }
+                                            if province.contains(self.verifyProvince(userProvince).uppercased()) {
+                                                
+                                                return true
+                                            } else {
+                                                
+                                                return false
                                             }
                                         } else {
                                             
                                             return false
                                         }
-                                    } else {
-                                        
-                                        return false
                                     }
                                 }
                                 ResponseData.shared.stationList.removeAll()
@@ -144,5 +145,144 @@ class APIManager {
             return provinceToCheck
         }
         
+    }
+    
+    func changeFilterType(element: String, oProvince: String?, currentValue: MapFilterType, average: Double) -> Bool {
+            
+            if let priceDouble = Double(element.replacingOccurrences(of: ",", with: ".")) {
+                
+                switch currentValue {
+                case .cheap:
+                    if priceDouble <= average - 0.06 {
+                        
+                        return true
+                    } else {
+                        
+                        return false
+                    }
+                case .regular:
+                    if priceDouble > average - 0.06 && priceDouble < average + 0.06 {
+                        
+                        return true
+                    } else {
+                        
+                        return false
+                    }
+                case .expensice:
+                    if priceDouble >= average + 0.06 {
+                        
+                        return true
+                    } else {
+                        
+                        return false
+                    }
+                case .all:
+                    if let province = oProvince,
+                       let placermark = self.placemarkData,
+                       let userProvince = placermark.administrativeArea {
+                        
+                        if province.contains(self.verifyProvince(userProvince).uppercased()) {
+                            
+                            return true
+                        } else {
+                            
+                            return false
+                        }
+                    } else {
+                        
+                        return false
+                    }
+                default:
+                    if priceDouble <= average - 0.06 {
+                        
+                        return true
+                    } else {
+                        
+                        return false
+                    }
+                }
+            } else {
+                
+                return false
+            }
+        }
+    
+    func recalculateAverage() {
+        var priceArray: [Double] = []
+    
+        for element in ResponseData.shared.regularList {
+            
+            if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+            let gasCase = GasType(rawValue: gasType) {
+                switch gasCase {
+                case .diesel:
+                    if let price = element.regularDieselPrice,
+                       let priceDouble = Double(price.replacingOccurrences(of: ",", with: ".")),
+                       let province = element.province {
+                        
+                        if !province.uppercased().contains("TENERIFE") || !province.uppercased().contains("PALMAS") || !province.uppercased().contains("CEUTA") || !province.uppercased().contains("MELILLA") {
+                            
+                            priceArray.append(priceDouble)
+                        }
+                    }
+                case .gasoline:
+                    if let price = element.regularGasPrice,
+                       let priceDouble = Double(price.replacingOccurrences(of: ",", with: ".")),
+                       let province = element.province {
+                        
+                        if !province.uppercased().contains("TENERIFE") || !province.uppercased().contains("PALMAS") || !province.uppercased().contains("CEUTA") || !province.uppercased().contains("MELILLA") {
+                            
+                            priceArray.append(priceDouble)
+                        }
+                    }
+                case .lpg:
+                    if let price = element.lpgPrice,
+                       let priceDouble = Double(price.replacingOccurrences(of: ",", with: ".")),
+                       let province = element.province {
+                        
+                        if !province.uppercased().contains("TENERIFE") || !province.uppercased().contains("PALMAS") || !province.uppercased().contains("CEUTA") || !province.uppercased().contains("MELILLA") {
+                            
+                            priceArray.append(priceDouble)
+                        }
+                    }
+                case .cng:
+                    if let price = element.cngPrice,
+                       let priceDouble = Double(price.replacingOccurrences(of: ",", with: ".")),
+                       let province = element.province {
+                        
+                        if !province.uppercased().contains("TENERIFE") || !province.uppercased().contains("PALMAS") || !province.uppercased().contains("CEUTA") || !province.uppercased().contains("MELILLA") {
+                            
+                            priceArray.append(priceDouble)
+                        }
+                    }
+                case .lng:
+                    if let price = element.lngPrice,
+                       let priceDouble = Double(price.replacingOccurrences(of: ",", with: ".")),
+                       let province = element.province {
+                        
+                        if !province.uppercased().contains("TENERIFE") || !province.uppercased().contains("PALMAS") || !province.uppercased().contains("CEUTA") || !province.uppercased().contains("MELILLA") {
+                            
+                            priceArray.append(priceDouble)
+                        }
+                    }
+                }
+            } else {
+                if let price = element.regularGasPrice,
+                   let priceDouble = Double(price.replacingOccurrences(of: ",", with: ".")),
+                   let province = element.province {
+                    
+                    if !province.uppercased().contains("TENERIFE") || !province.uppercased().contains("PALMAS") || !province.uppercased().contains("CEUTA") || !province.uppercased().contains("MELILLA") {
+                        
+                        priceArray.append(priceDouble)
+                    }
+                }
+            }
+        }
+        
+        let average = priceArray.reduce(0.0) {
+            return $0 + $1/Double(priceArray.count)
+        }
+        
+        ResponseData.shared.average = average
     }
 }

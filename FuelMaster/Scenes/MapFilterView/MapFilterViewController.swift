@@ -44,6 +44,7 @@ class MapFilterViewController: UIViewController, UITableViewDelegate, UITableVie
                     }
                 }
             } else {
+                self.location = CLLocation(latitude: 40.4165000,longitude: -3.7025600)
                 CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: 40.4165000,longitude: -3.7025600)) { placemarkList, error in
                     if error == nil {
                         if let placemark = placemarkList {
@@ -95,82 +96,9 @@ class MapFilterViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func changeMainList() {
-        let average = ResponseData.shared.average
-        
-        let currentValue = (Constants.filtersList.first { element in
-            return element.isSelected
-        })?.priceType
-        
-        let modList = ResponseData.shared.regularList.filter { element in
-            
-            if element.regularGasPrice != "" {
-                
-                if let priceDouble = Double(element.regularGasPrice!.replacingOccurrences(of: ",", with: ".")) {
-                    
-                    switch currentValue {
-                    case .cheap:
-                        if priceDouble <= average - 0.06 {
-                            
-                            return true
-                        } else {
-                            
-                            return false
-                        }
-                    case .regular:
-                        if priceDouble > average - 0.06 && priceDouble < average + 0.06 {
-                            
-                            return true
-                        } else {
-                            
-                            return false
-                        }
-                    case .expensice:
-                        if priceDouble >= average + 0.06 {
-                            
-                            return true
-                        } else {
-                            
-                            return false
-                        }
-                    case .all:
-                        if let province = element.province,
-                           let placermark = self.placemarkData,
-                           let userProvince = placermark.administrativeArea {
-                            
-                            if province.contains(verifyProvince(userProvince).uppercased()) {
-                                
-                                return true
-                            } else {
-                                
-                                return false
-                            }
-                        } else {
-                            
-                            return false
-                        }
-                    case .none:
-                        if priceDouble <= average - 0.06 {
-                            
-                            return true
-                        } else {
-                            
-                            return false
-                        }
-                    }
-                } else {
-                    
-                    return false
-                }
-            } else {
-                
-                return false
-            }
-        }
-        
-        ResponseData.shared.stationList.removeAll()
-        ResponseData.shared.stationList = modList
-        NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil)
-
+        let manager = APIManager()
+        manager.userLocation = self.location
+        manager.changeMainList()
     }
     
     func verifyProvince(_ provinceToCheck: String) -> String {

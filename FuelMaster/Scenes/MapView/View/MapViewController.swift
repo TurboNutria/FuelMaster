@@ -109,7 +109,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
             for i in d {
                 
                 let annotation = MKPointAnnotation()
-                annotation.title = "\(i.owner ?? "DESCONOCIDO") - \(i.regularGasPrice ?? "--")€"
+                if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+                let gasCase = GasType(rawValue: gasType) {
+                    
+                    switch gasCase {
+                    case .diesel:
+                        annotation.title = "\(i.owner ?? "DESCONOCIDO") - \(i.regularDieselPrice ?? "--")€"
+                    case .gasoline:
+                        annotation.title = "\(i.owner ?? "DESCONOCIDO") - \(i.regularGasPrice ?? "--")€"
+                    case .lpg:
+                        annotation.title = "\(i.owner ?? "DESCONOCIDO") - \(i.lpgPrice ?? "--")€"
+                    case .cng:
+                        annotation.title = "\(i.owner ?? "DESCONOCIDO") - \(i.cngPrice ?? "--")€"
+                    case .lng:
+                        annotation.title = "\(i.owner ?? "DESCONOCIDO") - \(i.lngPrice ?? "--")€"
+                    }
+                } else {
+                    
+                    annotation.title = "\(i.owner ?? "DESCONOCIDO") - \(i.regularGasPrice ?? "--")€"
+                }
                 annotation.subtitle = i.address
                 annotation.coordinate = CLLocationCoordinate2D(latitude: Double(i.latitude.replacingOccurrences(of: ",", with: "."))!, longitude: Double(i.longitude!.replacingOccurrences(of: ",", with: "."))!)
                     
@@ -191,29 +209,138 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         if let stationData = station.first {
             
             annotationView?.glyphImage = UIImage(systemName: "fuelpump.circle")
-            
-            if let price = stationData.regularGasPrice {
-                
-                if let priceInt = Double(price.replacingOccurrences(of: ",", with: ".")) {
-                    
-                    if priceInt <= ResponseData.shared.average - 0.06 {
+            if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+            let gasCase = GasType(rawValue: gasType) {
+                switch gasCase {
+                case .diesel:
+                    if let price = stationData.regularDieselPrice {
                         
-                        annotationView?.markerTintColor = UIColor(red: (51.0/255), green: (161.0/255), blue: (79.0/255), alpha: 1.0)
+                        if let priceInt = Double(price.replacingOccurrences(of: ",", with: ".")) {
+                            
+                            if priceInt <= ResponseData.shared.average - 0.06 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (51.0/255), green: (161.0/255), blue: (79.0/255), alpha: 1.0)
 
-                    } else if priceInt >= ResponseData.shared.average - 0.05 && priceInt <= ResponseData.shared.average + 0.05 {
-                        
-                        annotationView?.markerTintColor = UIColor(red: (249.0/255), green: (126.0/255), blue: (43.0/255), alpha: 1.0)
+                            } else if priceInt >= ResponseData.shared.average - 0.05 && priceInt <= ResponseData.shared.average + 0.05 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (249.0/255), green: (126.0/255), blue: (43.0/255), alpha: 1.0)
 
+                            } else {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (247.0/255), green: (75.0/255), blue: (36.0/255), alpha: 1.0)
+
+                            }
+                        }
                     } else {
                         
-                        annotationView?.markerTintColor = UIColor(red: (247.0/255), green: (75.0/255), blue: (36.0/255), alpha: 1.0)
+                        annotationView?.markerTintColor = UIColor.gray
+                        
+                        }
 
-                    }
+                case .gasoline:
+                    if let price = stationData.regularGasPrice {
+                        
+                        if let priceInt = Double(price.replacingOccurrences(of: ",", with: ".")) {
+                            
+                            if priceInt <= ResponseData.shared.average - 0.06 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (51.0/255), green: (161.0/255), blue: (79.0/255), alpha: 1.0)
+
+                            } else if priceInt >= ResponseData.shared.average - 0.05 && priceInt <= ResponseData.shared.average + 0.05 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (249.0/255), green: (126.0/255), blue: (43.0/255), alpha: 1.0)
+
+                            } else {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (247.0/255), green: (75.0/255), blue: (36.0/255), alpha: 1.0)
+
+                            }
+                        }
+                    } else {
+                        
+                        annotationView?.markerTintColor = UIColor.gray
+                        
+                        }
+
+                case .lpg:
+                    if let price = stationData.lpgPrice {
+                        
+                        if let priceInt = Double(price.replacingOccurrences(of: ",", with: ".")) {
+                            
+                            if priceInt <= ResponseData.shared.average - 0.06 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (51.0/255), green: (161.0/255), blue: (79.0/255), alpha: 1.0)
+
+                            } else if priceInt >= ResponseData.shared.average - 0.05 && priceInt <= ResponseData.shared.average + 0.05 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (249.0/255), green: (126.0/255), blue: (43.0/255), alpha: 1.0)
+
+                            } else {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (247.0/255), green: (75.0/255), blue: (36.0/255), alpha: 1.0)
+
+                            }
+                        }
+                    } else {
+                        
+                        annotationView?.markerTintColor = UIColor.gray
+                        
+                        }
+
+                case .cng:
+                    if let price = stationData.cngPrice {
+                        
+                        if let priceInt = Double(price.replacingOccurrences(of: ",", with: ".")) {
+                            
+                            if priceInt <= ResponseData.shared.average - 0.06 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (51.0/255), green: (161.0/255), blue: (79.0/255), alpha: 1.0)
+
+                            } else if priceInt >= ResponseData.shared.average - 0.05 && priceInt <= ResponseData.shared.average + 0.05 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (249.0/255), green: (126.0/255), blue: (43.0/255), alpha: 1.0)
+
+                            } else {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (247.0/255), green: (75.0/255), blue: (36.0/255), alpha: 1.0)
+
+                            }
+                        }
+                    } else {
+                        
+                        annotationView?.markerTintColor = UIColor.gray
+                        
+                        }
+
+                case .lng:
+                    if let price = stationData.lngPrice {
+                        
+                        if let priceInt = Double(price.replacingOccurrences(of: ",", with: ".")) {
+                            
+                            if priceInt <= ResponseData.shared.average - 0.06 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (51.0/255), green: (161.0/255), blue: (79.0/255), alpha: 1.0)
+
+                            } else if priceInt >= ResponseData.shared.average - 0.05 && priceInt <= ResponseData.shared.average + 0.05 {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (249.0/255), green: (126.0/255), blue: (43.0/255), alpha: 1.0)
+
+                            } else {
+                                
+                                annotationView?.markerTintColor = UIColor(red: (247.0/255), green: (75.0/255), blue: (36.0/255), alpha: 1.0)
+
+                            }
+                        }
+                    } else {
+                        
+                        annotationView?.markerTintColor = UIColor.gray
+                        
+                        }
+
                 }
             } else {
                 
                 annotationView?.markerTintColor = UIColor.gray
-                
                 }
             } else {
                 
