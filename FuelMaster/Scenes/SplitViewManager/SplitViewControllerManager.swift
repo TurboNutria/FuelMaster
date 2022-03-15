@@ -30,6 +30,7 @@ class SplitViewControllerManager: UISplitViewController, CLLocationManagerDelega
 
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        Constants.userLocation = manager
         
     }
     
@@ -38,15 +39,17 @@ class SplitViewControllerManager: UISplitViewController, CLLocationManagerDelega
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways {
+        if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
             if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
                 if CLLocationManager.isRangingAvailable() {
-                    // do stuff
                 }
             }
+        } else if status == .notDetermined {
+            
+        } else {
+            
         }
     }
-    
 }
 
 extension CLLocation {

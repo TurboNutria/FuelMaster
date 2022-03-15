@@ -21,4 +21,8 @@ class APIManagerInteractor {
             self.presenter?.foundData(data: output)
         }
     }
+    
+    func sortData() {
+        self.repository.changeMainList()
+    }
 }

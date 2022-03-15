@@ -64,6 +64,7 @@ struct StationData: Codable {
     let bioEthanolPercentage: String?
     let esterPercentage: String?
     var distanceToUser: Double?
+    var IDCCAA: String?
     
     enum CodingKeys: String, CodingKey {
         case postalCode = "C.P."
@@ -89,6 +90,7 @@ struct StationData: Codable {
         case owner = "Rótulo"
         case bioEthanolPercentage = "% BioEtanol"
         case esterPercentage = "% Éster metílico"
+        case IDCCAA = "IDCCAA"
         
     }
     

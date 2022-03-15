@@ -27,6 +27,8 @@ class DetailFooterCell: UITableViewCell {
             
             favButton.setTitle("Quitar de favoritos", for: .normal)
         }
+        shareButton.layer.cornerRadius = shareButton.frame.height / 2
+        favButton.layer.cornerRadius = favButton.frame.height / 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

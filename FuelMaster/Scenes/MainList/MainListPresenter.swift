@@ -81,10 +81,17 @@ class MainListPresenter: APIManagerOutput {
             for i in d {
                 
                 sortedList.append(i)
-                
-                let distance = CLLocation.distance(from: (viewController?.locationManager?.location!.coordinate)! , to: CLLocationCoordinate2D(latitude: i.latitudeDouble, longitude: i.longitudeDouble))
-                let roundedValue = round((distance / 1000) * 100) / 100.0
-                sortedList[sortedList.endIndex - 1].distanceToUser = (roundedValue)
+                if viewController?.locationManager?.authorizationStatus == .authorizedWhenInUse {
+                 
+                    if let vC = viewController,
+                       let lM = vC.locationManager,
+                       let location = lM.location {
+                        
+                        let distance = CLLocation.distance(from: location.coordinate , to: CLLocationCoordinate2D(latitude: i.latitudeDouble, longitude: i.longitudeDouble))
+                        let roundedValue = round((distance / 1000) * 100) / 100.0
+                        sortedList[sortedList.endIndex - 1].distanceToUser = (roundedValue)
+                    }
+                }
             }
         }
                
@@ -103,7 +110,13 @@ class MainListPresenter: APIManagerOutput {
     func filterUserDistance(list: [StationData]) -> [StationData] {
         let sortedByDistanceList = list.filter { data in
             
-            return data.distanceToUser! < 11.0
+            if let distance = data.distanceToUser {
+                
+                return distance < 11.0
+            } else {
+                
+                return false
+            }
         }
 
         return sortedByDistanceList

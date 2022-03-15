@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import CoreLocationUI
 
-class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDelegate, MapFilterViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDelegate, MapFilterViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var locationButton: CLLocationButton!
@@ -45,10 +45,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
 //        self.map.addGestureRecognizer(tap)
         self.map.showsUserLocation = true
         locationManager = CLLocationManager()
+        locationManager?.delegate = self
         locationButton.addTarget(self, action: #selector(userPressedLocationButton), for: .touchUpInside)
+        Constants.userLocation = locationManager
         if locationManager?.authorizationStatus == .authorizedWhenInUse {
-            
-            
             self.centerMapOnLocation(location: (locationManager?.location)!)
         }
     }
@@ -123,25 +123,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     }
     
     @objc func dataFound() {
-        
-        self.map.removeAnnotations(self.currentAnnotations)
-        DispatchQueue.main.async {
-            self.centerMapOnLocation(location: (self.locationManager?.location)!)
-       let data = ResponseData.shared.stationList
-         let d = data
-            for i in d {
-                
-                let annotation = MKPointAnnotation()
-                annotation.title = "\(i.owner ?? "DESCONOCIDO") - \(i.regularGasPrice ?? "--")€"
-                annotation.subtitle = i.address
-                annotation.coordinate = CLLocationCoordinate2D(latitude: Double(i.latitude.replacingOccurrences(of: ",", with: "."))!, longitude: Double(i.longitude!.replacingOccurrences(of: ",", with: "."))!)
-                    
-                    self.currentAnnotations.append(annotation)
-                    self.map.addAnnotation(annotation)
-            }
-            self.activityIndicator.stopAnimating()
-            self.map.alpha = 1.0
-            self.map.isUserInteractionEnabled = true 
+        let manager = APIManager()
+        let status = locationManager?.authorizationStatus
+        print(status!.rawValue)
+        if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
+            manager.userLocation = self.locationManager?.location
+            manager.changeMainList()
+            self.centerMapOnLocation(location: (locationManager?.location)!)
+        } else if status == .denied {
+            manager.userLocation = CLLocation(latitude: 40.4165000, longitude: -3.7025600)
+            manager.changeMainList()
+            self.centerMapOnLocation(location: CLLocation(latitude: 40.4165000, longitude: -3.7025600))
+        } else {
         }
     }
     
@@ -283,6 +276,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapFilterView")
         (vc.children.first as! MapFilterViewController).delegate = self
         self.present(vc, animated: true)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        Constants.userLocation = manager
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
+            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
+                if CLLocationManager.isRangingAvailable() {
+                }
+            }
+        } else if status == .notDetermined {
+            
+        } else {
+            NotificationCenter.default.post(name: NSNotification.Name("foundData"), object: nil)
+
+        }
     }
 }
 

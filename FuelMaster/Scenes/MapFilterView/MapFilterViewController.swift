@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 protocol MapFilterViewDelegate: AnyObject {
     func filterSelected()
@@ -17,6 +18,8 @@ class MapFilterViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView?
     
     weak var delegate: MapFilterViewDelegate?
+    var location: CLLocation?
+    var placemarkData: CLPlacemark?
     
     override func viewDidLoad() {
         
@@ -25,6 +28,34 @@ class MapFilterViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let nib = UINib(nibName: "MapFilterCell", bundle: nil)
         tableView?.register(nib, forCellReuseIdentifier: "MapFilterCell")
+        
+        if let locationManager = Constants.userLocation {
+            if let actualLocation = locationManager.location {
+                
+                self.location = actualLocation
+                CLGeocoder().reverseGeocodeLocation(actualLocation) { placemarkList, error in
+                    if error == nil {
+                        if let placemark = placemarkList {
+                            if placemark.count > 0 {
+                                
+                                self.placemarkData = placemark[0]
+                            }
+                        }
+                    }
+                }
+            } else {
+                CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: 40.4165000,longitude: -3.7025600)) { placemarkList, error in
+                    if error == nil {
+                        if let placemark = placemarkList {
+                            if placemark.count > 0 {
+                                
+                                self.placemarkData = placemark[0]
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -36,6 +67,10 @@ class MapFilterViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.filtersList.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,8 +133,21 @@ class MapFilterViewController: UIViewController, UITableViewDelegate, UITableVie
                             return false
                         }
                     case .all:
+                        if let province = element.province,
+                           let placermark = self.placemarkData,
+                           let userProvince = placermark.administrativeArea {
                             
-                            return true
+                            if province.contains(verifyProvince(userProvince).uppercased()) {
+                                
+                                return true
+                            } else {
+                                
+                                return false
+                            }
+                        } else {
+                            
+                            return false
+                        }
                     case .none:
                         if priceDouble <= average - 0.06 {
                             
@@ -123,6 +171,32 @@ class MapFilterViewController: UIViewController, UITableViewDelegate, UITableVie
         ResponseData.shared.stationList = modList
         NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil)
 
+    }
+    
+    func verifyProvince(_ provinceToCheck: String) -> String {
+        if provinceToCheck.uppercased().contains("CORUÑA") {
+            
+            return "CORUÑA"
+        } else if provinceToCheck.uppercased().contains("GERONA") {
+            
+            return "GIRONA"
+        } else if provinceToCheck.uppercased().contains("BALEARES") {
+            
+            return "BALEARS"
+        } else if provinceToCheck.uppercased().contains("LERIDA") {
+            
+            return "LLEIDA"
+        } else if provinceToCheck.uppercased().contains("GUIPUZ") {
+            
+            return "GIPUZKOA"
+        } else if provinceToCheck.uppercased().contains("VIZ") {
+            
+            return "BIZKAIA"
+        } else {
+            
+            return provinceToCheck
+        }
+        
     }
     
     @IBAction func closeAction(_ sender: Any?) {

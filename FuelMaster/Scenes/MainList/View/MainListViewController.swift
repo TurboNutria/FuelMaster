@@ -182,7 +182,7 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        Constants.userLocation = manager
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -213,7 +213,10 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
         
         if let list = self.stationsList {
             
-            self.tapStation(data: list[indexPath.row])
+            if indexPath.section > 1 {
+             
+                self.tapStation(data: list[indexPath.row])
+            }
         }
     }
     

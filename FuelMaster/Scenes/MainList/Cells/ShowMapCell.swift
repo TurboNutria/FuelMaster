@@ -19,7 +19,7 @@ class ShowMapCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        showMapButton.layer.cornerRadius = showMapButton.frame.height / 2
     }
 
     @IBAction func showMapAction(_ sender: Any) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20036.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20018.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,39 +26,41 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wea-2w-XF9">
-                        <rect key="frame" x="60" y="48" width="200" height="31"/>
+                        <rect key="frame" x="60" y="48" width="200" height="30"/>
+                        <color key="backgroundColor" name="cellColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="13u-5a-4u4"/>
                         </constraints>
                         <color key="tintColor" name="fontColor"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="filled" title="Añadir a favoritos" cornerStyle="capsule">
-                            <color key="baseBackgroundColor" name="cellColor"/>
-                        </buttonConfiguration>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="Añadir a favoritos">
+                            <color key="titleColor" name="fontColor"/>
+                        </state>
                         <connections>
                             <action selector="favAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WdX-06-CqM"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1D-RP-auJ">
-                        <rect key="frame" x="60" y="100" width="200" height="31"/>
+                        <rect key="frame" x="60" y="99" width="200" height="30"/>
+                        <color key="backgroundColor" name="cellColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="0lU-lq-I9f"/>
                         </constraints>
                         <color key="tintColor" name="fontColor"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="filled" title="Compartir" cornerStyle="capsule">
-                            <color key="baseBackgroundColor" name="cellColor"/>
-                        </buttonConfiguration>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="Compartir">
+                            <color key="titleColor" name="fontColor"/>
+                        </state>
                         <connections>
                             <action selector="shareAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BoH-4w-pyc"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCL-jB-gWX">
-                        <rect key="frame" x="10" y="161" width="300" height="122"/>
+                        <rect key="frame" x="10" y="159" width="300" height="122"/>
                         <string key="text">Precios actualizados el día 3 de noviembre a las 15:30.
  Datos obtenidos del Ministerio de Industria, Comercio  y Turismo.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" name="fontColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -86,7 +88,7 @@
     </objects>
     <resources>
         <namedColor name="cellColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="fontColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
