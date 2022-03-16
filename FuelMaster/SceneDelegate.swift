@@ -35,8 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         if UserDefaults.standard.value(forKey: "gasType") as? String == nil {
-            
-            UserDefaults.standard.set("Gasolina", forKey: "gasType")
         }
         
         

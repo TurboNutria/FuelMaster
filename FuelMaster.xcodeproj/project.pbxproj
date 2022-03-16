@@ -60,6 +60,11 @@
 		73BF8101277B192B00C4C146 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF8100277B192B00C4C146 /* ConfigurationViewController.swift */; };
 		73BF8103277B1EE500C4C146 /* GasPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF8102277B1EE500C4C146 /* GasPreference.swift */; };
 		73BF8105277B221E00C4C146 /* ConfigurationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF8104277B221E00C4C146 /* ConfigurationDetailViewController.swift */; };
+		73DC668327E2370700E96927 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DC668227E2370700E96927 /* Onboarding.storyboard */; };
+		73DC668827E23CE900E96927 /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC668727E23CE900E96927 /* FirstOnboardingViewController.swift */; };
+		73DC668A27E23D9700E96927 /* GasTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC668927E23D9700E96927 /* GasTypeViewController.swift */; };
+		73DC668C27E23E4900E96927 /* LitersToFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC668B27E23E4900E96927 /* LitersToFillViewController.swift */; };
+		73DC668E27E249DB00E96927 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC668D27E249DB00E96927 /* UITextField+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +124,11 @@
 		73BF8100277B192B00C4C146 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		73BF8102277B1EE500C4C146 /* GasPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasPreference.swift; sourceTree = "<group>"; };
 		73BF8104277B221E00C4C146 /* ConfigurationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationDetailViewController.swift; sourceTree = "<group>"; };
+		73DC668227E2370700E96927 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		73DC668727E23CE900E96927 /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
+		73DC668927E23D9700E96927 /* GasTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasTypeViewController.swift; sourceTree = "<group>"; };
+		73DC668B27E23E4900E96927 /* LitersToFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LitersToFillViewController.swift; sourceTree = "<group>"; };
+		73DC668D27E249DB00E96927 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +231,7 @@
 		73BB98612733D85E00E686D8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				73DC668427E23C5E00E96927 /* Onboarding */,
 				734F8D9027DCC3DA003F83F9 /* MapFilterView */,
 				73BF80F92779E2B000C4C146 /* Configuration */,
 				73AF3DD5277233BC0021D2EB /* LoadingView */,
@@ -236,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				73BB98652733D8DE00E686D8 /* Constants.swift */,
+				73DC668D27E249DB00E96927 /* UITextField+Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -245,6 +257,7 @@
 			children = (
 				73BB98512733D75E00E686D8 /* Main.storyboard */,
 				73AF3DD62772340F0021D2EB /* SyncStoryBoard.storyboard */,
+				73DC668227E2370700E96927 /* Onboarding.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -379,6 +392,24 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		73DC668427E23C5E00E96927 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				73DC668627E23CD700E96927 /* View */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		73DC668627E23CD700E96927 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73DC668727E23CE900E96927 /* FirstOnboardingViewController.swift */,
+				73DC668927E23D9700E96927 /* GasTypeViewController.swift */,
+				73DC668B27E23E4900E96927 /* LitersToFillViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -453,6 +484,7 @@
 				73BB98D9273AA22100E686D8 /* PriceContainerCell.xib in Resources */,
 				73BB98B527384C5800E686D8 /* FavStationCell.xib in Resources */,
 				73BB98E3273AA60400E686D8 /* InfoDetailCell.xib in Resources */,
+				73DC668327E2370700E96927 /* Onboarding.storyboard in Resources */,
 				73BF80FF277A073900C4C146 /* ConfigurationCell.xib in Resources */,
 				73BB98B12737FF0100E686D8 /* ShowMapCell.xib in Resources */,
 			);
@@ -465,14 +497,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73DC668E27E249DB00E96927 /* UITextField+Extensions.swift in Sources */,
+				73DC668827E23CE900E96927 /* FirstOnboardingViewController.swift in Sources */,
 				73BB988327353D1E00E686D8 /* StationsModel.xcdatamodeld in Sources */,
 				73BB98742733EAFA00E686D8 /* MainListViewController.swift in Sources */,
 				73BB98662733D8DE00E686D8 /* Constants.swift in Sources */,
 				73BB98632733D8BB00E686D8 /* APIManager.swift in Sources */,
 				73BB98D8273AA22100E686D8 /* PriceContainerCell.swift in Sources */,
+				73DC668A27E23D9700E96927 /* GasTypeViewController.swift in Sources */,
 				73BB98B02737FF0100E686D8 /* ShowMapCell.swift in Sources */,
 				73BB98772733EDD600E686D8 /* MapViewController.swift in Sources */,
 				734F8D9327DCC441003F83F9 /* MapFilterViewController.swift in Sources */,
+				73DC668C27E23E4900E96927 /* LitersToFillViewController.swift in Sources */,
 				73BB98DE273AA3B400E686D8 /* DetailHeaderCell.swift in Sources */,
 				73BB98E6273AA7A000E686D8 /* DetailFooterCell.swift in Sources */,
 				73BB98D4273A95A700E686D8 /* PriceDetailCell.swift in Sources */,
@@ -648,7 +684,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FuelMaster/FuelMaster.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 9L854LSJNS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FuelMaster/Info.plist;
@@ -681,7 +717,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FuelMaster/FuelMaster.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 9L854LSJNS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FuelMaster/Info.plist;

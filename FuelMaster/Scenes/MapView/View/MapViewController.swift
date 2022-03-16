@@ -101,9 +101,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     }
     
     @objc func updateMap() {
-        
+
         self.map.removeAnnotations(self.currentAnnotations)
         DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.map.alpha = 1.0
+            self.map.isUserInteractionEnabled = true
+
        let data = ResponseData.shared.stationList
          let d = data
             for i in d {
@@ -142,6 +146,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     
     @objc func dataFound() {
         DispatchQueue.main.async {
+            if UserDefaults.standard.value(forKey: "gasType") == nil {
+                let vc = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
+                let vcc = vc?.children.first as! FirstOnboardingViewController
+                vcc.delegate = self
+                self.present(vc!, animated: true)
+            }
 
         let manager = APIManager()
             let status = self.locationManager?.authorizationStatus
@@ -420,6 +430,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
             if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
                 if CLLocationManager.isRangingAvailable() {
+                    if UserDefaults.standard.value(forKey: "done") == nil {
+                        
+                        self.dataFound()
+                        UserDefaults.standard.set(true, forKey: "done")
+                    }
                 }
             }
         } else if status == .notDetermined {
@@ -431,4 +446,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     }
 }
 
+
+extension MapViewController: onboardingProtocol {
+    func finishedOnboarding() {
+        self.locationManager?.requestWhenInUseAuthorization()
+    }
+}
 
