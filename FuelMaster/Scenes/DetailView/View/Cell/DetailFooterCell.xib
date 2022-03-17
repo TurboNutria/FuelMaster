@@ -56,9 +56,9 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCL-jB-gWX">
-                        <rect key="frame" x="10" y="159" width="300" height="122"/>
+                        <rect key="frame" x="10" y="159" width="300" height="61"/>
                         <string key="text">Precios actualizados el día 3 de noviembre a las 15:30.
- Datos obtenidos del Ministerio de Industria, Comercio  y Turismo.</string>
+</string>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" name="fontColor"/>
                         <nil key="highlightedColor"/>
@@ -67,6 +67,7 @@
                 <constraints>
                     <constraint firstItem="D1D-RP-auJ" firstAttribute="top" secondItem="Wea-2w-XF9" secondAttribute="bottom" constant="21" id="0p3-rH-kt5"/>
                     <constraint firstItem="dCL-jB-gWX" firstAttribute="top" secondItem="D1D-RP-auJ" secondAttribute="bottom" constant="30" id="B1q-9F-w4x"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dCL-jB-gWX" secondAttribute="bottom" constant="10" id="DT4-6f-YFD"/>
                     <constraint firstItem="Wea-2w-XF9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="FXw-bc-BWb"/>
                     <constraint firstItem="dCL-jB-gWX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Vx0-22-tyz"/>
                     <constraint firstItem="D1D-RP-auJ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="XAH-g3-gll"/>

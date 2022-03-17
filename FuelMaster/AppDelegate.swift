@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         APIManager().getDataFromMinisty { output in
-            
+            UserDefaults.standard.set(Date(), forKey: "fecha")
+            UserDefaults.standard.set(false, forKey: "regional")
             var priceArray: [Double] = []
         
             for element in ResponseData.shared.stationList {

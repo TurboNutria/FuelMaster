@@ -11,6 +11,8 @@
 		734F8D9527DCC95C003F83F9 /* MapFilterElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734F8D9427DCC95C003F83F9 /* MapFilterElement.swift */; };
 		734F8D9827DCCDD1003F83F9 /* MapFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734F8D9627DCCDD1003F83F9 /* MapFilterCell.swift */; };
 		734F8D9927DCCDD1003F83F9 /* MapFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 734F8D9727DCCDD1003F83F9 /* MapFilterCell.xib */; };
+		73775E5327E26F4A00FFA369 /* TankConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73775E5227E26F4A00FFA369 /* TankConfigurationViewController.swift */; };
+		73775E5527E3561200FFA369 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73775E5427E3561200FFA369 /* AboutViewController.swift */; };
 		73AF3DD72772340F0021D2EB /* SyncStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73AF3DD62772340F0021D2EB /* SyncStoryBoard.storyboard */; };
 		73AF3DD9277234870021D2EB /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AF3DD8277234870021D2EB /* LoadingViewController.swift */; };
 		73AF3DE127733C670021D2EB /* PointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AF3DE027733C670021D2EB /* PointView.swift */; };
@@ -73,6 +75,8 @@
 		734F8D9427DCC95C003F83F9 /* MapFilterElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterElement.swift; sourceTree = "<group>"; };
 		734F8D9627DCCDD1003F83F9 /* MapFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterCell.swift; sourceTree = "<group>"; };
 		734F8D9727DCCDD1003F83F9 /* MapFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFilterCell.xib; sourceTree = "<group>"; };
+		73775E5227E26F4A00FFA369 /* TankConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankConfigurationViewController.swift; sourceTree = "<group>"; };
+		73775E5427E3561200FFA369 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		73AF3DD62772340F0021D2EB /* SyncStoryBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SyncStoryBoard.storyboard; sourceTree = "<group>"; };
 		73AF3DD8277234870021D2EB /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		73AF3DE027733C670021D2EB /* PointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointView.swift; sourceTree = "<group>"; };
@@ -379,6 +383,7 @@
 				73BF80FB2779E2B900C4C146 /* Cell */,
 				73BF8100277B192B00C4C146 /* ConfigurationViewController.swift */,
 				73BF8104277B221E00C4C146 /* ConfigurationDetailViewController.swift */,
+				73775E5427E3561200FFA369 /* AboutViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 			children = (
 				73BF80FC277A073800C4C146 /* ConfigurationCell.swift */,
 				73BF80FD277A073800C4C146 /* ConfigurationCell.xib */,
+				73775E5227E26F4A00FFA369 /* TankConfigurationViewController.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -510,6 +516,7 @@
 				734F8D9327DCC441003F83F9 /* MapFilterViewController.swift in Sources */,
 				73DC668C27E23E4900E96927 /* LitersToFillViewController.swift in Sources */,
 				73BB98DE273AA3B400E686D8 /* DetailHeaderCell.swift in Sources */,
+				73775E5327E26F4A00FFA369 /* TankConfigurationViewController.swift in Sources */,
 				73BB98E6273AA7A000E686D8 /* DetailFooterCell.swift in Sources */,
 				73BB98D4273A95A700E686D8 /* PriceDetailCell.swift in Sources */,
 				73BF8103277B1EE500C4C146 /* GasPreference.swift in Sources */,
@@ -530,6 +537,7 @@
 				73BB987E2733FAB800E686D8 /* MainListPresenter.swift in Sources */,
 				73BF8101277B192B00C4C146 /* ConfigurationViewController.swift in Sources */,
 				73BB98682733DA7F00E686D8 /* ResponseData.swift in Sources */,
+				73775E5527E3561200FFA369 /* AboutViewController.swift in Sources */,
 				73BB986A2733DBF200E686D8 /* StationData.swift in Sources */,
 				73BF80F527736EA100C4C146 /* FavList.swift in Sources */,
 				73BB984E2733D75E00E686D8 /* SceneDelegate.swift in Sources */,
@@ -684,7 +692,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FuelMaster/FuelMaster.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 9L854LSJNS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FuelMaster/Info.plist;
@@ -717,7 +725,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FuelMaster/FuelMaster.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 9L854LSJNS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FuelMaster/Info.plist;

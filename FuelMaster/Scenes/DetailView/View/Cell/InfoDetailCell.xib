@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20036.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20018.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,22 +18,34 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6Z-xC-FVk">
-                        <rect key="frame" x="16" y="0.0" width="166" height="131"/>
+                        <rect key="frame" x="16" y="0.0" width="253" height="131"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horario" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QA-tj-33w">
-                                <rect key="frame" x="10" y="12" width="63" height="22"/>
+                                <rect key="frame" x="27" y="22" width="63" height="22"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Llenar cuesta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Imr-Ky-cyT">
+                                <rect key="frame" x="113" y="22" width="113" height="22"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <color key="textColor" name="fontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L - V 10:00 a 20:00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9O-sg-4Pd">
-                                <rect key="frame" x="10" y="42" width="147" height="20.5"/>
+                                <rect key="frame" x="27" y="52" width="66" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="fontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abierto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijR-cK-og3">
-                                <rect key="frame" x="10" y="71.5" width="56" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijR-cK-og3">
+                                <rect key="frame" x="10" y="122" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20€" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6P-S7-9Ty">
+                                <rect key="frame" x="113" y="52" width="30.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="fontColor"/>
                                 <nil key="highlightedColor"/>
@@ -41,20 +53,24 @@
                         </subviews>
                         <color key="backgroundColor" name="cellColor"/>
                         <constraints>
-                            <constraint firstItem="C9O-sg-4Pd" firstAttribute="leading" secondItem="q6Z-xC-FVk" secondAttribute="leading" constant="10" id="CqN-0c-uoT"/>
-                            <constraint firstItem="8QA-tj-33w" firstAttribute="leading" secondItem="q6Z-xC-FVk" secondAttribute="leading" constant="10" id="Hsl-2E-x5m"/>
+                            <constraint firstItem="r6P-S7-9Ty" firstAttribute="leading" secondItem="Imr-Ky-cyT" secondAttribute="leading" id="9ud-gP-ycI"/>
+                            <constraint firstItem="C9O-sg-4Pd" firstAttribute="leading" secondItem="q6Z-xC-FVk" secondAttribute="leading" constant="27" id="CqN-0c-uoT"/>
+                            <constraint firstItem="8QA-tj-33w" firstAttribute="leading" secondItem="q6Z-xC-FVk" secondAttribute="leading" constant="27" id="Hsl-2E-x5m"/>
+                            <constraint firstItem="r6P-S7-9Ty" firstAttribute="top" secondItem="Imr-Ky-cyT" secondAttribute="bottom" constant="8" symbolic="YES" id="Lz9-fu-gYQ"/>
                             <constraint firstItem="C9O-sg-4Pd" firstAttribute="top" secondItem="8QA-tj-33w" secondAttribute="bottom" constant="8" symbolic="YES" id="fn8-Aw-F8Z"/>
-                            <constraint firstItem="8QA-tj-33w" firstAttribute="top" secondItem="q6Z-xC-FVk" secondAttribute="top" constant="12" id="hF9-x3-JtU"/>
+                            <constraint firstItem="8QA-tj-33w" firstAttribute="top" secondItem="q6Z-xC-FVk" secondAttribute="top" constant="22" id="hF9-x3-JtU"/>
                             <constraint firstItem="ijR-cK-og3" firstAttribute="leading" secondItem="q6Z-xC-FVk" secondAttribute="leading" constant="10" id="hvg-xW-o0j"/>
-                            <constraint firstAttribute="trailing" secondItem="C9O-sg-4Pd" secondAttribute="trailing" constant="9" id="obe-aB-z7y"/>
+                            <constraint firstAttribute="trailing" secondItem="Imr-Ky-cyT" secondAttribute="trailing" constant="27" id="nVg-qM-psf"/>
+                            <constraint firstAttribute="trailing" secondItem="C9O-sg-4Pd" secondAttribute="trailing" constant="160" id="obe-aB-z7y"/>
                             <constraint firstItem="ijR-cK-og3" firstAttribute="top" secondItem="C9O-sg-4Pd" secondAttribute="bottom" constant="9" id="sHp-sp-mYV"/>
+                            <constraint firstItem="Imr-Ky-cyT" firstAttribute="top" secondItem="q6Z-xC-FVk" secondAttribute="top" constant="22" id="x4b-8z-NSQ"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="q6Z-xC-FVk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5fB-Zi-NYx"/>
                     <constraint firstAttribute="bottom" secondItem="q6Z-xC-FVk" secondAttribute="bottom" id="GQM-1O-8zJ"/>
-                    <constraint firstAttribute="trailing" secondItem="q6Z-xC-FVk" secondAttribute="trailing" constant="160" id="Pa2-WP-EDQ"/>
+                    <constraint firstAttribute="trailing" secondItem="q6Z-xC-FVk" secondAttribute="trailing" constant="73" id="Pa2-WP-EDQ"/>
                     <constraint firstItem="q6Z-xC-FVk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="dhB-qA-PR9"/>
                 </constraints>
             </tableViewCellContentView>
@@ -63,6 +79,7 @@
             <connections>
                 <outlet property="containerView" destination="q6Z-xC-FVk" id="1Yh-m6-Phu"/>
                 <outlet property="hoursLabel" destination="C9O-sg-4Pd" id="2kF-ME-OsA"/>
+                <outlet property="priceLabel" destination="r6P-S7-9Ty" id="AlK-oh-Ebh"/>
                 <outlet property="statusLabel" destination="ijR-cK-og3" id="CPX-mf-vVo"/>
                 <outlet property="titleLabel" destination="8QA-tj-33w" id="lT4-Ix-cjf"/>
             </connections>
@@ -71,7 +88,7 @@
     </objects>
     <resources>
         <namedColor name="cellColor">
-            <color red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="fontColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

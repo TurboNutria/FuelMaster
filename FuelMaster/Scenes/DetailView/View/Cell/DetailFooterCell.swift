@@ -23,6 +23,17 @@ class DetailFooterCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        if let date = UserDefaults.standard.value(forKey: "fecha") as? Date {
+            
+            let currentDate = date
+            let dateFormatted = currentDate.formatted(date: .long, time: .shortened)
+            self.disclaimerLabel.text = "Datos obtenidos el día \(dateFormatted)"
+        } else {
+            
+            let currentDate = Date()
+            let dateFormatted = currentDate.formatted(date: .long, time: .shortened)
+            self.disclaimerLabel.text = "Datos obtenidos el día \(dateFormatted)"
+        }
         if isAlreadyFav {
             
             favButton.setTitle("Quitar de favoritos", for: .normal)

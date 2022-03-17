@@ -16,13 +16,13 @@ class ConfigurationViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             
-            return 2
+            return 1
         } else {
             
             return 1
@@ -43,25 +43,33 @@ class ConfigurationViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConfigurationCell", for: indexPath) as? ConfigurationCell
         
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                
-                cell?.typeLabel.text = "Distancia"
-            } else {
-                
-                cell?.typeLabel.text = "Orden"
-            }
-        } else {
+            
+            cell?.typeLabel.text = "Tamaño del depósito"
+        } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 
                 cell?.typeLabel.text = "Combustible"
             }
+        } else {
+            
+            cell?.typeLabel.text = "Acerca de"
         }
         
         return cell!
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "detailSegue", sender: nil)
+        
+        if indexPath.section == 0 {
+            
+            self.performSegue(withIdentifier: "tankSegue", sender: nil)
+        } else if indexPath.section == 2 {
+            
+            self.performSegue(withIdentifier: "aboutSegue", sender: nil)
+        } else {
+            
+            self.performSegue(withIdentifier: "detailSegue", sender: nil)
+        }
     }
     
     @IBAction func closeAction(_ sender: Any?) {

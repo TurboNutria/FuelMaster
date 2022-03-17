@@ -45,7 +45,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 NotificationCenter.default.post(name: NSNotification.Name("refresh"), object: nil)
                 APIManager().getDataFromMinisty { output in
-                    
+                    UserDefaults.standard.set(Date(), forKey: "fecha")
+                    UserDefaults.standard.set(false, forKey: "regional")
                     var priceArray: [Double] = []
                 
                     for element in ResponseData.shared.stationList {

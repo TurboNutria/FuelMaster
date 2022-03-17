@@ -13,6 +13,7 @@ class InfoDetailCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

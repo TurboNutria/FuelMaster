@@ -10,6 +10,7 @@ import Foundation
 struct ResponseData: Codable {
     var stationList: [StationData]
     var regularList: [StationData] = []
+    var regionalList: [StationData] = []
     
     static var shared = ResponseData(list: [])
     var average: Double = 0.0

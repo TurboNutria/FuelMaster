@@ -120,6 +120,21 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
             let cell = tableView.dequeueReusableCell(withIdentifier: "InfoDetailCell", for: indexPath) as! InfoDetailCell
             
             cell.hoursLabel.text = station?.openingHours!
+            if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
+            let gasCase = GasType(rawValue: gasType) {
+                switch gasCase {
+                case .diesel:
+                    cell.priceLabel.text = "\(Double((station?.regularDieselPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                case .gasoline:
+                    cell.priceLabel.text = "\(Double((station?.regularGasPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                case .lpg:
+                    cell.priceLabel.text = "\(Double((station?.lpgPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                case .cng:
+                    cell.priceLabel.text = "\(Double((station?.cngPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                case .lng:
+                    cell.priceLabel.text = "\(Double((station?.lngPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                }
+            }
             
             return cell
         } else if indexPath.section == tableView.numberOfSections - 1 {

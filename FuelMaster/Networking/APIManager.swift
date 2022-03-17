@@ -45,7 +45,33 @@ class APIManager {
                                     return element.isSelected
                                 })?.priceType
                                 
-                                let modList = ResponseData.shared.regularList.filter { element in
+                                if !UserDefaults.standard.bool(forKey: "regional") {
+                                    
+                                    let regionalList = ResponseData.shared.regularList.filter { element in
+                                        if let province = element.province,
+                                           let placermark = self.placemarkData,
+                                           let userProvince = placermark.administrativeArea {
+                                            
+                                            if province.contains(self.verifyProvince(userProvince).uppercased()) {
+                                                
+                                                return true
+                                            } else {
+                                                
+                                                return false
+                                            }
+                                        } else {
+                                            
+                                            return false
+                                        }
+
+                                    }
+                                    
+                                    ResponseData.shared.regionalList = regionalList
+                                    UserDefaults.standard.set(true, forKey: "regional")
+                                }
+                                
+                                
+                                let modList = ResponseData.shared.regionalList.filter { element in
                                     if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
                                     let gasCase = GasType(rawValue: gasType) {
                                         
@@ -140,7 +166,37 @@ class APIManager {
         } else if provinceToCheck.uppercased().contains("VIZ") {
             
             return "BIZKAIA"
-        } else {
+        } else if provinceToCheck.uppercased().contains("SARAGOSSA") {
+            
+            return "ZARAGOZA"
+        } else if provinceToCheck.uppercased().contains("CADIZ") {
+            
+            return "CÁDIZ"
+        } else if provinceToCheck.uppercased().contains("JAEN") {
+            
+            return "JAÉN"
+        } else if provinceToCheck.uppercased().contains("CORDOBA") {
+            
+            return "CÓRDOBA"
+        }  else if provinceToCheck.uppercased().contains("MALAGA") {
+            
+            return "MÁLAGA"
+        }  else if provinceToCheck.uppercased().contains("LEON") {
+            
+            return "LEÓN"
+        }  else if provinceToCheck.uppercased().contains("AVILA") {
+            
+            return "ÁVILA"
+        }  else if provinceToCheck.uppercased().contains("RIOJA") {
+            
+            return "RIOJA"
+        } else if provinceToCheck.uppercased().contains("CACERES") {
+            
+            return "CÁCERES"
+        }  else if provinceToCheck.uppercased().contains("ALMERIA") {
+            
+            return "ALMERÍA"
+        }  else {
             
             return provinceToCheck
         }

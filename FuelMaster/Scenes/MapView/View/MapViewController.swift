@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import CoreLocationUI
 
-class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDelegate, MapFilterViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDelegate, MapFilterViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var locationButton: CLLocationButton!
@@ -37,7 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         self.parent?.navigationController?.navigationBar.backgroundColor = .clear
         
         NotificationCenter.default.addObserver(self, selector: #selector(dataFound), name: NSNotification.Name("foundData"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshMap), name: NSNotification.Name("refresh"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshMap), name: NSNotification.Name("refresh"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateMap), name: NSNotification.Name("update"), object: nil)
         let navButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), landscapeImagePhone: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(filterAction))
         self.navigationItem.rightBarButtonItem = navButton
@@ -51,6 +51,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         if locationManager?.authorizationStatus == .authorizedWhenInUse {
             self.centerMapOnLocation(location: (locationManager?.location)!)
         }
+        
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(refreshMapArea(_:)))
+        gesture.delegate = self
+        map.addGestureRecognizer(gesture)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -150,6 +158,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
                 let vc = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
                 let vcc = vc?.children.first as! FirstOnboardingViewController
                 vcc.delegate = self
+                vc?.isModalInPresentation = true
                 self.present(vc!, animated: true)
             }
 
@@ -366,6 +375,41 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         return annotationView
     }
 
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+ 
+      
+    }
+    
+    
+    @objc func refreshMapArea(_ gesture: UIGestureRecognizer) {
+        if gesture.state == .ended {
+            refreshArea()
+        }
+
+    }
+    
+    func refreshArea() {
+        if let region = UserDefaults.standard.value(forKey: "region") as? String {
+        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.map.centerCoordinate.latitude, longitude: self.map.centerCoordinate.longitude)) { placemarkList, error in
+            if error == nil {
+                if let placemark = placemarkList {
+                    if placemark.count > 0 {
+                        
+                        if let area = placemark[0].administrativeArea {
+                            if area != region {
+                                
+                                UserDefaults.standard.set(placemark[0].administrativeArea!, forKey: "region")
+                                UserDefaults.standard.set(false, forKey: "regional")
+                                let manager = APIManager()
+                                manager.userLocation = CLLocation(latitude: self.map.centerCoordinate.latitude, longitude: self.map.centerCoordinate.longitude)
+                                manager.changeMainList()
+                            }
+
+                        }
+                    }}}}
+    }
+
+    }
     @objc func dismissDetailSheet() {
         if let d = detailView {
             
@@ -391,6 +435,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     }
     
     func centerMapOnLocation(location: CLLocation, _ withZoom: Bool = false) {
+
         var coordinateRegion = MKCoordinateRegion(center: location.coordinate,
                                                   latitudinalMeters: 2040, longitudinalMeters: 2040)
         
@@ -399,6 +444,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
             coordinateRegion.span  = MKCoordinateSpan(latitudeDelta: 0.124, longitudeDelta: 0.011)
         }
       map.setRegion(coordinateRegion, animated: true)
+        self.refreshArea()
     }
     
     @objc func userPressedLocationButton() {
@@ -430,6 +476,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
             if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
                 if CLLocationManager.isRangingAvailable() {
+                    
+                    var currentRegion = ""
+                    CLGeocoder().reverseGeocodeLocation((locationManager?.location!)!) { placemarkList, error in
+                        if error == nil {
+                            if let placemark = placemarkList {
+                                if placemark.count > 0 {
+                                    currentRegion = placemark[0].administrativeArea!
+                                }}}}
+
+                    if UserDefaults.standard.value(forKey: "region") == nil {
+                        UserDefaults.standard.set(currentRegion, forKey: "region")
+                        UserDefaults.standard.set(false, forKey: "regional")
+                    } else if (UserDefaults.standard.value(forKey: "region") as! String) != currentRegion {
+                        
+                        UserDefaults.standard.set(currentRegion, forKey: "region")
+                        UserDefaults.standard.set(false, forKey: "regional")
+                    }
+                    
                     if UserDefaults.standard.value(forKey: "done") == nil {
                         
                         self.dataFound()
@@ -449,7 +513,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
 
 extension MapViewController: onboardingProtocol {
     func finishedOnboarding() {
-        self.locationManager?.requestWhenInUseAuthorization()
+        self.locationManager?.requestAlwaysAuthorization()
     }
 }
 

@@ -24,7 +24,7 @@ class MainListPresenter: APIManagerOutput {
         self.currentList.removeAll()
         interactor.presenter = self
         
-        if !ResponseData.shared.regularList.isEmpty {
+        if !ResponseData.shared.regionalList.isEmpty {
             
             self.foundData(data: ResponseData.shared)
         }
@@ -81,7 +81,7 @@ class MainListPresenter: APIManagerOutput {
     }
     
     func foundData(data: ResponseData?) {
-        if let d = data?.regularList {
+        if let d = data?.regionalList {
             for i in d {
                 
                 if viewController?.locationManager?.authorizationStatus == .authorizedWhenInUse || viewController?.locationManager?.authorizationStatus == .authorizedAlways {
