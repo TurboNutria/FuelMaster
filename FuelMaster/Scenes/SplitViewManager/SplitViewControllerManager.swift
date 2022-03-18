@@ -20,6 +20,7 @@ class SplitViewControllerManager: UISplitViewController, CLLocationManagerDelega
     override func viewDidLoad() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
+        self.view.tintColor = UIColor(named: "fontColor")
 //        let mainList = ((self.viewControllers.first as! UINavigationController).viewControllers.first as! MainListViewController)
 //        mainList.mapView = ((self.viewControllers.last as! UINavigationController).viewControllers.first as! MapViewController)
     }

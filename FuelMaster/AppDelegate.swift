@@ -61,7 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ResponseData.shared.regularList = ResponseData.shared.stationList
             ResponseData.shared.stationList.removeAll()
             ResponseData.shared.stationList = modList
-            NotificationCenter.default.post(name: NSNotification.Name("foundData"), object: nil)
+            if UserDefaults.standard.value(forKey: "done") != nil {
+                
+                NotificationCenter.default.post(name: NSNotification.Name("foundData"), object: nil)
+            } else {
+             
+                NotificationCenter.default.post(name: NSNotification.Name("onboarding"), object: nil)
+            }
+
         }
         
         return true

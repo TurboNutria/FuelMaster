@@ -39,6 +39,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         NotificationCenter.default.addObserver(self, selector: #selector(dataFound), name: NSNotification.Name("foundData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshMap), name: NSNotification.Name("refresh"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateMap), name: NSNotification.Name("update"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setOnboarding), name: NSNotification.Name("onboarding"), object: nil)
         let navButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), landscapeImagePhone: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(filterAction))
         self.navigationItem.rightBarButtonItem = navButton
 //        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapOutside))
@@ -152,7 +153,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         }
     }
     
-    @objc func dataFound() {
+    @objc func setOnboarding() {
         DispatchQueue.main.async {
             if UserDefaults.standard.value(forKey: "gasType") == nil {
                 let vc = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
@@ -161,6 +162,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
                 vc?.isModalInPresentation = true
                 self.present(vc!, animated: true)
             }
+        }
+    }
+    
+    @objc func dataFound() {
+        DispatchQueue.main.async {
 
         let manager = APIManager()
             let status = self.locationManager?.authorizationStatus
@@ -193,7 +199,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
            let title = annotation.title {
             if !(title == "My Location") {
                 self.selectedPin = view
-                self.centerMapOnLocation(location: CLLocation(latitude: (view.annotation?.coordinate.latitude)! - 0.006, longitude: (view.annotation?.coordinate.longitude)!))
                 if let vc = self.detailView {
 
                     self.configureDetailSheet(vc: vc.parent!, source: view)
@@ -219,6 +224,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
                     }
                     vc.station = station.first
                     present(vcN, animated: true, completion: nil)
+                    
                 }
             }
         }
@@ -447,7 +453,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
             coordinateRegion.span  = MKCoordinateSpan(latitudeDelta: 0.124, longitudeDelta: 0.011)
         }
       map.setRegion(coordinateRegion, animated: true)
-        self.refreshArea()
+        if UserDefaults.standard.value(forKey: "region") != nil {
+            if UserDefaults.standard.string(forKey: "region") !=                             Constants.currentUserProvince && UserDefaults.standard.string(forKey: "region") != "" {
+                
+                self.refreshArea()
+            }
+        }
     }
     
     @objc func userPressedLocationButton() {

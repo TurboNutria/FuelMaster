@@ -26,19 +26,19 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avenida de Francisco Pi y Margall 19" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-fw-SIH">
-                        <rect key="frame" x="149" y="31" width="254" height="36"/>
+                        <rect key="frame" x="149" y="31" width="249" height="36"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                         <color key="textColor" name="fontColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28050, Castillejo de la Vera" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyU-1s-2nJ">
-                        <rect key="frame" x="149" y="75" width="254" height="18"/>
+                        <rect key="frame" x="149" y="75" width="249" height="18"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                         <color key="textColor" name="fontColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGf-zV-9hR">
-                        <rect key="frame" x="145" y="142" width="200" height="31"/>
+                        <rect key="frame" x="142.5" y="142" width="200" height="31"/>
                         <color key="backgroundColor" name="cellColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="3xr-Nd-4LC"/>
@@ -63,7 +63,7 @@
                     <constraint firstItem="2Me-fw-SIH" firstAttribute="leading" secondItem="ZLf-u7-Q9E" secondAttribute="trailing" constant="18" id="UIq-Hi-znB"/>
                     <constraint firstItem="2Me-fw-SIH" firstAttribute="top" secondItem="ZLf-u7-Q9E" secondAttribute="top" id="bGa-NB-smJ"/>
                     <constraint firstItem="eyU-1s-2nJ" firstAttribute="top" secondItem="2Me-fw-SIH" secondAttribute="bottom" constant="8" symbolic="YES" id="d3o-ST-XCq"/>
-                    <constraint firstAttribute="trailing" secondItem="2Me-fw-SIH" secondAttribute="trailing" id="i5L-Yk-hb2"/>
+                    <constraint firstAttribute="trailing" secondItem="2Me-fw-SIH" secondAttribute="trailing" constant="5" id="i5L-Yk-hb2"/>
                     <constraint firstItem="eyU-1s-2nJ" firstAttribute="trailing" secondItem="2Me-fw-SIH" secondAttribute="trailing" id="xNi-kb-MZr"/>
                 </constraints>
             </tableViewCellContentView>

@@ -124,15 +124,24 @@ class StationDetailViewController: UIViewController, UITableViewDelegate, UITabl
             let gasCase = GasType(rawValue: gasType) {
                 switch gasCase {
                 case .diesel:
-                    cell.priceLabel.text = "\(Double((station?.regularDieselPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                    if let stationSafe = station,
+                       let stationPrice = stationSafe.regularDieselPrice?.replacingOccurrences(of: ",", with: "."),
+                       let liters = UserDefaults.standard.value(forKey: "liters") as? Int
+                        {
+
+                       let x =  ((Double(stationPrice)!) * Double(liters))
+                        let y = Double(round(1000 * x) / 1000)
+                        cell.priceLabel.text = "\(y) €"
+                    }
+//                    cell.priceLabel.text = "\(Double((station?.regularDieselPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters")).truncate(places: 2)) €"
                 case .gasoline:
-                    cell.priceLabel.text = "\(Double((station?.regularGasPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                    cell.priceLabel.text = "\(Double((station?.regularGasPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters")).truncate(places: 2)) €"
                 case .lpg:
-                    cell.priceLabel.text = "\(Double((station?.lpgPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                    cell.priceLabel.text = "\(Double((station?.lpgPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters")).truncate(places: 2)) €"
                 case .cng:
-                    cell.priceLabel.text = "\(Double((station?.cngPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                    cell.priceLabel.text = "\(Double((station?.cngPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters")).truncate(places: 2)) €"
                 case .lng:
-                    cell.priceLabel.text = "\(Double((station?.lngPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters"))) €"
+                    cell.priceLabel.text = "\(Double((station?.lngPrice?.replacingOccurrences(of: ",", with: "."))!)! * Double(UserDefaults.standard.integer(forKey: "liters")).truncate(places: 2)) €"
                 }
             }
             

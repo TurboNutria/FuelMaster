@@ -34,6 +34,7 @@ class APIManager {
             if error == nil {
                 if let placemark = placemarkList {
                     if placemark.count > 0 {
+                        Constants.currentUserProvince = placemark[0].administrativeArea!
                         let regionalList = ResponseData.shared.regularList.filter { element in
                             if let province = element.province,
                                let userProvince = placemark[0].administrativeArea {

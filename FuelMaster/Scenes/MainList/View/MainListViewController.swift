@@ -95,7 +95,7 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
             return header
         } else {
             
-            header.titleLabel.text = "Todas"
+            header.titleLabel.text = "Cercanas"
             header.titleLabel.isHidden = false
             header.sortButton.isHidden = false
             header.backgroundView?.backgroundColor = .clear

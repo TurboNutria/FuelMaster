@@ -19,6 +19,7 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rkx-aY-puI">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="tintColor" name="fontColor"/>
                             </mapView>
                             <clLocationButton opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" icon="arrowOutline" cornerRadius="20" translatesAutoresizingMaskIntoConstraints="NO" id="bp0-mi-dwX">
                                 <rect key="frame" x="363" y="735" width="41" height="41"/>
@@ -345,7 +346,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="40" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jxn-30-ONY">
-                                <rect key="frame" x="107" y="424" width="200" height="50"/>
+                                <rect key="frame" x="107" y="226" width="200" height="50"/>
                                 <color key="backgroundColor" name="backgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="V56-ci-n3G"/>
@@ -359,7 +360,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="l" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0p-yU-zID">
-                                <rect key="frame" x="287" y="438.5" width="4" height="21"/>
+                                <rect key="frame" x="287" y="240.5" width="4" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="fontColor"/>
                                 <nil key="highlightedColor"/>
@@ -368,10 +369,10 @@
                         <viewLayoutGuide key="safeArea" id="44c-4b-kx5"/>
                         <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
+                            <constraint firstItem="V0p-yU-zID" firstAttribute="centerY" secondItem="jxn-30-ONY" secondAttribute="centerY" id="0xv-M5-yXv"/>
                             <constraint firstItem="V0p-yU-zID" firstAttribute="leading" secondItem="jxn-30-ONY" secondAttribute="trailing" constant="-20" id="ALT-1P-yAA"/>
+                            <constraint firstItem="jxn-30-ONY" firstAttribute="top" secondItem="kiQ-Ku-Y8R" secondAttribute="bottom" constant="100" id="F7g-H4-JKN"/>
                             <constraint firstItem="kiQ-Ku-Y8R" firstAttribute="top" secondItem="44c-4b-kx5" secondAttribute="top" constant="29" id="b5J-Hg-N9H"/>
-                            <constraint firstItem="V0p-yU-zID" firstAttribute="centerY" secondItem="jxn-30-ONY" secondAttribute="centerY" id="gjB-gf-D8B"/>
-                            <constraint firstItem="jxn-30-ONY" firstAttribute="centerY" secondItem="44c-4b-kx5" secondAttribute="centerY" id="k6L-R2-Jok"/>
                             <constraint firstItem="kiQ-Ku-Y8R" firstAttribute="leading" secondItem="44c-4b-kx5" secondAttribute="leading" constant="20" id="rXl-kN-6fi"/>
                             <constraint firstItem="jxn-30-ONY" firstAttribute="centerX" secondItem="44c-4b-kx5" secondAttribute="centerX" id="tEB-jm-QfD"/>
                         </constraints>

@@ -194,7 +194,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="40" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pnV-6C-1bM">
-                                <rect key="frame" x="107" y="450" width="200" height="50"/>
+                                <rect key="frame" x="107" y="328" width="200" height="50"/>
                                 <color key="backgroundColor" name="backgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="gFc-Iq-gaM"/>
@@ -208,7 +208,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="l" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utg-OO-KiL">
-                                <rect key="frame" x="287" y="464.5" width="4" height="21"/>
+                                <rect key="frame" x="287" y="342.5" width="4" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="fontColor"/>
                                 <nil key="highlightedColor"/>
@@ -219,13 +219,13 @@
                         <constraints>
                             <constraint firstItem="58Q-Ds-Ggj" firstAttribute="leading" secondItem="mgy-nS-Bms" secondAttribute="leading" constant="20" id="01e-jC-l0L"/>
                             <constraint firstItem="pnV-6C-1bM" firstAttribute="centerX" secondItem="mgy-nS-Bms" secondAttribute="centerX" id="1f2-wQ-Vzu"/>
-                            <constraint firstItem="utg-OO-KiL" firstAttribute="centerY" secondItem="pnV-6C-1bM" secondAttribute="centerY" id="2d1-Vg-OSs"/>
                             <constraint firstItem="mgy-nS-Bms" firstAttribute="bottom" secondItem="k7S-c8-COB" secondAttribute="bottom" constant="82" id="5HW-Zl-io4"/>
                             <constraint firstItem="utg-OO-KiL" firstAttribute="leading" secondItem="pnV-6C-1bM" secondAttribute="trailing" constant="-20" id="Ddb-q8-Rmf"/>
+                            <constraint firstItem="pnV-6C-1bM" firstAttribute="top" secondItem="WdZ-3O-Jg1" secondAttribute="bottom" constant="80" id="NlS-3I-2wQ"/>
+                            <constraint firstItem="utg-OO-KiL" firstAttribute="centerY" secondItem="pnV-6C-1bM" secondAttribute="centerY" id="QPW-wp-TYY"/>
                             <constraint firstItem="WdZ-3O-Jg1" firstAttribute="top" secondItem="58Q-Ds-Ggj" secondAttribute="bottom" constant="5" id="WZF-NP-VSN"/>
                             <constraint firstItem="WdZ-3O-Jg1" firstAttribute="leading" secondItem="58Q-Ds-Ggj" secondAttribute="leading" id="bAf-iv-wHe"/>
                             <constraint firstItem="WdZ-3O-Jg1" firstAttribute="trailing" secondItem="mgy-nS-Bms" secondAttribute="trailing" constant="-20" id="l1A-YP-Mud"/>
-                            <constraint firstItem="pnV-6C-1bM" firstAttribute="centerY" secondItem="mgy-nS-Bms" secondAttribute="centerY" id="pTW-qa-s4h"/>
                             <constraint firstItem="58Q-Ds-Ggj" firstAttribute="top" secondItem="mgy-nS-Bms" secondAttribute="top" constant="29" id="wk3-kD-eJp"/>
                             <constraint firstItem="k7S-c8-COB" firstAttribute="centerX" secondItem="mgy-nS-Bms" secondAttribute="centerX" id="z0Q-tV-97C"/>
                         </constraints>
