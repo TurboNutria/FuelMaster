@@ -271,7 +271,7 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
                     if let favList = UserDefaults.standard.array(forKey: "favList") as? [Int] {
                         
                         for i in favList {
-                           let favStation = ResponseData.shared.regionalList.filter { data in
+                           let favStation = ResponseData.shared.regularList.filter { data in
                                 return data.IDEESS == String(i)
                             }
                             

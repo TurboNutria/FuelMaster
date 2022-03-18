@@ -168,10 +168,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
             manager.userLocation = self.locationManager?.location
             manager.changeMainList()
+            manager.setRegionalArea()
             self.centerMapOnLocation(location: (self.locationManager?.location)!)
         } else if status == .denied {
             manager.userLocation = CLLocation(latitude: 40.4165000, longitude: -3.7025600)
             manager.changeMainList()
+            manager.setRegionalArea()
             self.centerMapOnLocation(location: CLLocation(latitude: 40.4165000, longitude: -3.7025600))
         } else {
         }}
@@ -401,6 +403,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
                                 UserDefaults.standard.set(placemark[0].administrativeArea!, forKey: "region")
                                 UserDefaults.standard.set(false, forKey: "regional")
                                 let manager = APIManager()
+                                Constants.displacedLication = CLLocation(latitude: self.map.centerCoordinate.latitude, longitude: self.map.centerCoordinate.longitude)
                                 manager.userLocation = CLLocation(latitude: self.map.centerCoordinate.latitude, longitude: self.map.centerCoordinate.longitude)
                                 manager.changeMainList()
                             }
@@ -476,7 +479,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
             if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
                 if CLLocationManager.isRangingAvailable() {
-                    
                     var currentRegion = ""
                     CLGeocoder().reverseGeocodeLocation((locationManager?.location!)!) { placemarkList, error in
                         if error == nil {

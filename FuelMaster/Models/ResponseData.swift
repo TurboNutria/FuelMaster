@@ -9,6 +9,7 @@ import Foundation
 
 struct ResponseData: Codable {
     var stationList: [StationData]
+    var userRegional: [StationData] = []
     var regularList: [StationData] = []
     var regionalList: [StationData] = []
     

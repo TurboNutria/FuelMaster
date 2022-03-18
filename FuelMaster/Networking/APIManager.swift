@@ -29,6 +29,33 @@ class APIManager {
         }
     }
     
+    func setRegionalArea() {
+        CLGeocoder().reverseGeocodeLocation(self.userLocation!) { placemarkList, error in
+            if error == nil {
+                if let placemark = placemarkList {
+                    if placemark.count > 0 {
+                        let regionalList = ResponseData.shared.regularList.filter { element in
+                            if let province = element.province,
+                               let userProvince = placemark[0].administrativeArea {
+                                
+                                if province.contains(self.verifyProvince(userProvince).uppercased()) {
+                                    
+                                    return true
+                                } else {
+                                    
+                                    return false
+                                }
+                            } else {
+                                
+                                return false
+                            }
+
+                        }
+                        ResponseData.shared.userRegional = regionalList
+                    }}}}
+        
+    }
+    
     func changeMainList() {
             if let actualLocation = userLocation {
                 

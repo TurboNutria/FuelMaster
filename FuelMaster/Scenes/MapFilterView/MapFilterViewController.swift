@@ -97,8 +97,24 @@ class MapFilterViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func changeMainList() {
         let manager = APIManager()
-        manager.userLocation = self.location
-        manager.changeMainList()
+        if let locationmanager = Constants.displacedLication {
+            
+            manager.userLocation = locationmanager
+            manager.changeMainList()
+        } else {
+            
+            if let locationManager = Constants.userLocation,
+               let location = locationManager.location {
+                
+                manager.userLocation = location
+                manager.changeMainList()
+            } else {
+                
+                manager.userLocation = CLLocation(latitude: 40.4165000, longitude: -3.7025600)
+                manager.changeMainList()
+            }
+        }
+
     }
     
     func verifyProvince(_ provinceToCheck: String) -> String {

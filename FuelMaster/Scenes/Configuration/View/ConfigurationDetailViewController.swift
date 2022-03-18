@@ -59,15 +59,22 @@ class ConfigurationDetailViewController: UITableViewController {
         
         UserDefaults.standard.set(self.typesList[indexPath.row].type.rawValue, forKey: "gasType")
         let manager = APIManager()
-        if let locationmanager = Constants.userLocation,
-           let _ = locationmanager.location {
+        if let locationmanager = Constants.displacedLication {
             
-            manager.userLocation = Constants.userLocation?.location
+            manager.userLocation = locationmanager
             manager.changeMainList()
         } else {
             
-            manager.userLocation = CLLocation(latitude: 40.4165000, longitude: -3.7025600)
-            manager.changeMainList()
+            if let locationManager = Constants.userLocation,
+               let location = locationManager.location {
+                
+                manager.userLocation = location
+                manager.changeMainList()
+            } else {
+                
+                manager.userLocation = CLLocation(latitude: 40.4165000, longitude: -3.7025600)
+                manager.changeMainList()
+            }
         }
         self.tableView.reloadData()
     }
