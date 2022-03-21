@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Captura de Pantalla 2022-03-17 a las 11.19.05-1.png",
+      "filename" : "Alas-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Captura de Pantalla 2022-03-17 a las 11.19.05.png",
+      "filename" : "Alas-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Captura de Pantalla 2022-03-17 a las 11.19.05-2.png",
+      "filename" : "Alas.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

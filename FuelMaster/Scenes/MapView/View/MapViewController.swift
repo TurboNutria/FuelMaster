@@ -23,7 +23,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     var locationManager: CLLocationManager?
     var currentAnnotations: [MKAnnotation] = []
     var selectStatus = false
-
+    var centerUpdate = false
+    
     override func viewDidLoad() {
         self.map.alpha = 0.5
         self.map.isUserInteractionEnabled = false
@@ -84,29 +85,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     }
     
     @objc func refreshMap() {
-        if let originalDate = UserDefaults.standard.value(forKey: "backgroundDate") as? Date {
-            
-            let currentDate = Date()
-            if DateInterval(start: originalDate, end: currentDate).duration >= Constants.OneDay {
-                DispatchQueue.main.async {
+        
+        locationManager?.requestLocation()
+        DispatchQueue.main.async {
+            if let latitude = UserDefaults.standard.value(forKey: "currentLatitude") as? Double,
+               let longitude = UserDefaults.standard.value(forKey: "currentLongitude") as? Double,
+               let locationmanager = self.locationManager,
+               let location = locationmanager.location {
+                print(location.coordinate.latitude)
+                print(CLLocationDegrees(latitude))
+                if location.coordinate.latitude != CLLocationDegrees(latitude) || location.coordinate.longitude != CLLocationDegrees(longitude) {
                     
-//                    self.map.alpha = 0.5
-//                    self.map.isUserInteractionEnabled = false
-//                    self.activityIndicator.startAnimating()
+                    UserDefaults.standard.set(location.coordinate.latitude, forKey: "currentLatitude")
+                    UserDefaults.standard.set(location.coordinate.longitude, forKey: "currentLongitude")
+                    let manager = APIManager()
+                    manager.userLocation = location
+                    manager.setRegionalArea()
+                    self.centerUpdate = true
+                    self.centerMapOnLocation(location: location)
                 }
-            } else {
                 
-                DispatchQueue.main.async {
-//                    self.centerMapOnLocation(location: (self.locationManager?.location)!)
-                }
             }
-        } else {
-            
-            DispatchQueue.main.async {
-//                self.centerMapOnLocation(location: (self.locationManager?.location)!)
-            }
-
         }
+
     }
     
     @objc func updateMap() {
@@ -182,6 +183,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
             manager.setRegionalArea()
             self.centerMapOnLocation(location: CLLocation(latitude: 40.4165000, longitude: -3.7025600))
         } else {
+            if UserDefaults.standard.value(forKey: "done") != nil {
+                manager.userLocation = CLLocation(latitude: 40.4165000, longitude: -3.7025600)
+                manager.changeMainList()
+                manager.setRegionalArea()
+                self.centerMapOnLocation(location: CLLocation(latitude: 40.4165000, longitude: -3.7025600))
+            }
         }}
     }
     
@@ -198,6 +205,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         if let annotation = view.annotation,
            let title = annotation.title {
             if !(title == "My Location") {
+                
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    
+                    self.centerMapOnLocation(location: CLLocation(latitude: (view.annotation?.coordinate.latitude)! - 0.006, longitude: (view.annotation?.coordinate.longitude)!))
+                }
+                
+                
                 self.selectedPin = view
                 if let vc = self.detailView {
 
@@ -237,7 +251,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         }
         if let stationData = station.first {
             
-            annotationView?.glyphImage = UIImage(systemName: "fuelpump.circle")
+            if
+               let ownerName = stationData.owner {
+                
+                let ownerString = Constants.ownersList.filter { owner in
+                    return ownerName.contains(owner)
+                }
+                if ownerString.count > 0 {
+                    
+                    if let image = OriginalUIImage(named: ownerString.first!) {
+                        
+                        annotationView?.glyphImage = image
+                    } else {
+                        
+                        annotationView?.glyphImage = UIImage(systemName: "fuelpump.circle")
+                    }
+                } else {
+                    
+                    annotationView?.glyphImage = UIImage(systemName: "fuelpump.circle")
+                }
+            } else {
+                
+                annotationView?.glyphImage = UIImage(systemName: "fuelpump.circle")
+            }
+
+            
             if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String,
             let gasCase = GasType(rawValue: gasType) {
                 switch gasCase {
@@ -453,17 +491,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
             coordinateRegion.span  = MKCoordinateSpan(latitudeDelta: 0.124, longitudeDelta: 0.011)
         }
       map.setRegion(coordinateRegion, animated: true)
-        if UserDefaults.standard.value(forKey: "region") != nil {
-            if UserDefaults.standard.string(forKey: "region") !=                             Constants.currentUserProvince && UserDefaults.standard.string(forKey: "region") != "" {
-                
-                self.refreshArea()
-            }
+//        if UserDefaults.standard.value(forKey: "region") != nil {
+//            if UserDefaults.standard.string(forKey: "region") !=                             Constants.currentUserProvince && UserDefaults.standard.string(forKey: "region") != "" {
+        if centerUpdate {
+            
+            self.refreshArea()
+            centerUpdate = false
         }
+//            }
+//        }
     }
     
     @objc func userPressedLocationButton() {
-        
-        self.centerMapOnLocation(location: (locationManager?.location)!)
+        if let manager = locationManager {
+            if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
+                
+                centerUpdate = true
+                self.centerMapOnLocation(location: (locationManager?.location)!)
+            } else {
+                
+                manager.requestLocation()
+            }
+        }
     }
     
     func filterSelected() {
@@ -485,12 +534,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
     }
-    
+        
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse  || status == .authorizedAlways || status == .restricted {
-            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
-                if CLLocationManager.isRangingAvailable() {
+        if status == .authorizedWhenInUse  || status == .authorizedAlways   {
                     var currentRegion = ""
+            UserDefaults.standard.set(self.locationManager?.location?.coordinate.longitude, forKey: "currentLongitude")
+            UserDefaults.standard.set(self.locationManager?.location?.coordinate.latitude, forKey: "currentLatitude")
                     CLGeocoder().reverseGeocodeLocation((locationManager?.location!)!) { placemarkList, error in
                         if error == nil {
                             if let placemark = placemarkList {
@@ -512,10 +561,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
                         self.dataFound()
                         UserDefaults.standard.set(true, forKey: "done")
                     }
-                }
-            }
         } else if status == .notDetermined {
-            
+            print("Not Determined")
+            if UserDefaults.standard.value(forKey: "done") != nil {
+                NotificationCenter.default.post(name: NSNotification.Name("foundData"), object: nil)
+            }
         } else {
             NotificationCenter.default.post(name: NSNotification.Name("foundData"), object: nil)
 
@@ -526,7 +576,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
 
 extension MapViewController: onboardingProtocol {
     func finishedOnboarding() {
-        self.locationManager?.requestAlwaysAuthorization()
+        self.locationManager?.requestWhenInUseAuthorization()
     }
 }
 
+class OriginalUIImage: UIImage {
+
+    convenience init?(named name: String) {
+        guard let image = UIImage(named: name),
+              nil != image.cgImage else {
+                    return nil
+        }
+    
+        self.init(cgImage: image.cgImage!)
+    }
+
+    override func withRenderingMode(_ renderingMode: UIImage.RenderingMode) -> UIImage {
+        // both return statements work:
+        return self
+        // return super.withRenderingMode(.alwaysOriginal)
+    }
+
+}

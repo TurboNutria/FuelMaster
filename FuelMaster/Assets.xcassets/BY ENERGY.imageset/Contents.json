@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "logo_byenergy.es_350px-209x49.png",
+      "filename" : "Byenergy -2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "logo_byenergy.es_350px-209x49-1.png",
+      "filename" : "Byenergy -1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "logo_byenergy.es_350px-209x49-2.png",
+      "filename" : "Byenergy .png",
       "idiom" : "universal",
       "scale" : "3x"
     }

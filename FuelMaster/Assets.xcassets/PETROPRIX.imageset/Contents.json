@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "iu-3.jpeg",
+      "filename" : "petroprix.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "iu-4.jpeg",
+      "filename" : "petroprix-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "iu-5.jpeg",
+      "filename" : "petroprix-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

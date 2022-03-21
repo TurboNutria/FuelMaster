@@ -15,6 +15,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="49o-Fk-jD4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="fontColor"/>
                     </navigationBar>
                     <connections>
                         <segue destination="zCM-24-iLg" kind="relationship" relationship="rootViewController" id="4Re-ui-jIW"/>

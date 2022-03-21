@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "logo_circulo.png",
+      "filename" : "Valcarce -2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "logo_circulo-1.png",
+      "filename" : "Valcarce -1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "logo_circulo-2.png",
+      "filename" : "Valcarce .png",
       "idiom" : "universal",
       "scale" : "3x"
     }

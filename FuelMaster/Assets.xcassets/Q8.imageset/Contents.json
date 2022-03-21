@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Q8_Pos.png",
+      "filename" : "Q8-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Q8_Pos-1.png",
+      "filename" : "Q8-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Q8_Pos-2.png",
+      "filename" : "Q8.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

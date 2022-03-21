@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "525289.png",
+      "filename" : "Shell .png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "525289-1.png",
+      "filename" : "Shell -1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "525289-2.png",
+      "filename" : "Shell -2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,5 +19,8 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "original"
   }
 }

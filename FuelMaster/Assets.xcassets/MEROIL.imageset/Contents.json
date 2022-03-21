@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "logo_meroil.png",
+      "filename" : "Meroil -2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "logo_meroil-1.png",
+      "filename" : "Meroil -1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "logo_meroil-2.png",
+      "filename" : "Meroil .png",
       "idiom" : "universal",
       "scale" : "3x"
     }

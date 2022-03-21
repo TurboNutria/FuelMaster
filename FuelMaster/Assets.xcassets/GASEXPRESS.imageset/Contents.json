@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "logo-gasexpress-color-new.png",
+      "filename" : "Gasexpress-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "logo-gasexpress-color-new-1.png",
+      "filename" : "Gasexpress-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "logo-gasexpress-color-new-2.png",
+      "filename" : "Gasexpress.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
