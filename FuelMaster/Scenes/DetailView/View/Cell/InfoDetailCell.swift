@@ -17,7 +17,11 @@ class InfoDetailCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        containerView.layer.borderColor = UIColor(named: "borderColor")!.cgColor
         containerView.layer.cornerRadius = 20
+        containerView.layer.borderWidth = 1
+        self.selectedBackgroundView?.backgroundColor = .clear
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7330BA8B27EB6BD40029EEA5 /* SwiftReverseGeoCode in Frameworks */ = {isa = PBXBuildFile; productRef = 7330BA8A27EB6BD40029EEA5 /* SwiftReverseGeoCode */; };
+		7330BA9327EB7BA60029EEA5 /* geocitydb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7330BA9227EB7BA60029EEA5 /* geocitydb.sqlite */; };
 		734F8D9327DCC441003F83F9 /* MapFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734F8D9227DCC441003F83F9 /* MapFilterViewController.swift */; };
 		734F8D9527DCC95C003F83F9 /* MapFilterElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734F8D9427DCC95C003F83F9 /* MapFilterElement.swift */; };
 		734F8D9827DCCDD1003F83F9 /* MapFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734F8D9627DCCDD1003F83F9 /* MapFilterCell.swift */; };
@@ -71,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		7302067C27425BCB00F0C537 /* FuelMaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FuelMaster.entitlements; sourceTree = "<group>"; };
+		7330BA9227EB7BA60029EEA5 /* geocitydb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = geocitydb.sqlite; sourceTree = "<group>"; };
 		734F8D9227DCC441003F83F9 /* MapFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterViewController.swift; sourceTree = "<group>"; };
 		734F8D9427DCC95C003F83F9 /* MapFilterElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterElement.swift; sourceTree = "<group>"; };
 		734F8D9627DCCDD1003F83F9 /* MapFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterCell.swift; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7330BA8B27EB6BD40029EEA5 /* SwiftReverseGeoCode in Frameworks */,
 				73BB98D02739590F00E686D8 /* CoreLocationUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +209,7 @@
 				73BB984F2733D75E00E686D8 /* ViewController.swift */,
 				73BB98542733D76100E686D8 /* Assets.xcassets */,
 				73BB98562733D76100E686D8 /* LaunchScreen.storyboard */,
+				7330BA9227EB7BA60029EEA5 /* geocitydb.sqlite */,
 				73BB98592733D76100E686D8 /* Info.plist */,
 			);
 			path = FuelMaster;
@@ -432,6 +437,9 @@
 			dependencies = (
 			);
 			name = FuelMaster;
+			packageProductDependencies = (
+				7330BA8A27EB6BD40029EEA5 /* SwiftReverseGeoCode */,
+			);
 			productName = FuelMaster;
 			productReference = 73BB98482733D75D00E686D8 /* FuelMaster.app */;
 			productType = "com.apple.product-type.application";
@@ -461,6 +469,9 @@
 				Base,
 			);
 			mainGroup = 73BB983F2733D75D00E686D8;
+			packageReferences = (
+				7330BA8927EB6BD30029EEA5 /* XCRemoteSwiftPackageReference "SwiftReverseGeoCode" */,
+			);
 			productRefGroup = 73BB98492733D75D00E686D8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -478,6 +489,7 @@
 				73BB98D5273A95A700E686D8 /* PriceDetailCell.xib in Resources */,
 				734F8D9927DCCDD1003F83F9 /* MapFilterCell.xib in Resources */,
 				73BB98B927384FBC00E686D8 /* StationCollectionCell.xib in Resources */,
+				7330BA9327EB7BA60029EEA5 /* geocitydb.sqlite in Resources */,
 				73BB98DF273AA3B400E686D8 /* DetailHeaderCell.xib in Resources */,
 				73BB98E7273AA7A000E686D8 /* DetailFooterCell.xib in Resources */,
 				73BB98582733D76100E686D8 /* LaunchScreen.storyboard in Resources */,
@@ -692,7 +704,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FuelMaster/FuelMaster.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9L854LSJNS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FuelMaster/Info.plist;
@@ -725,7 +737,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FuelMaster/FuelMaster.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9L854LSJNS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FuelMaster/Info.plist;
@@ -773,6 +785,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7330BA8927EB6BD30029EEA5 /* XCRemoteSwiftPackageReference "SwiftReverseGeoCode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hlemai/SwiftReverseGeoCode.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7330BA8A27EB6BD40029EEA5 /* SwiftReverseGeoCode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7330BA8927EB6BD30029EEA5 /* XCRemoteSwiftPackageReference "SwiftReverseGeoCode" */;
+			productName = SwiftReverseGeoCode;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		73BB988127353D1E00E686D8 /* StationsModel.xcdatamodeld */ = {

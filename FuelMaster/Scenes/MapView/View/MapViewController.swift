@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import CoreLocationUI
+import SwiftReverseGeoCode
 
 class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDelegate, MapFilterViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
@@ -435,7 +436,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     }
     
     func refreshArea() {
-        if let region = UserDefaults.standard.value(forKey: "region") as? String {
+        let path = Bundle.main.path(forResource: "geocitydb.sqlite", ofType: .none)
+
+        
+        let reverseService = ReverseGeoCodeService(database: path!)
+        do {
+            
+            let location = try reverseService.reverseGeoCode(latitude: self.map.centerCoordinate.latitude, longitude: self.map.centerCoordinate.longitude)
+            if let region = UserDefaults.standard.value(forKey: "region") as? String {
+                let area = location.adminName.replacingOccurrences(of: "Província de ", with: "")
+                if area != region {
+                    
+                    UserDefaults.standard.set(area, forKey: "region")
+                    UserDefaults.standard.set(false, forKey: "regional")
+                    let manager = APIManager()
+                    Constants.displacedLication = CLLocation(latitude: self.map.centerCoordinate.latitude, longitude: self.map.centerCoordinate.longitude)
+                    manager.userLocation = CLLocation(latitude: self.map.centerCoordinate.latitude, longitude: self.map.centerCoordinate.longitude)
+                    manager.changeMainList()
+                }
+            }
+        } catch {
+        
+//            Do nothing
+        }
+        
+      /*  if let region = UserDefaults.standard.value(forKey: "region") as? String {
         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.map.centerCoordinate.latitude, longitude: self.map.centerCoordinate.longitude)) { placemarkList, error in
             if error == nil {
                 if let placemark = placemarkList {
@@ -454,7 +479,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
 
                         }
                     }}}}
-    }
+    } */
 
     }
     @objc func dismissDetailSheet() {

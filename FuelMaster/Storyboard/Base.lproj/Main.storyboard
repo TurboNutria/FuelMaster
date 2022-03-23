@@ -185,7 +185,7 @@
                             <outlet property="delegate" destination="VYR-ny-Yvk" id="UW4-BP-PL5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Listado" largeTitleDisplayMode="always" id="a8B-0F-hwM">
+                    <navigationItem key="navigationItem" title="Listado" id="a8B-0F-hwM">
                         <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" id="Mrk-WU-SOf">
                             <connections>
                                 <segue destination="uOS-sf-ORe" kind="presentation" id="BWm-To-KYR"/>
@@ -301,8 +301,8 @@
         <scene sceneID="E3D-3F-LdW">
             <objects>
                 <navigationController id="krw-C5-Ez8" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="AYT-g5-0Xz">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AYT-g5-0Xz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="fontColor"/>

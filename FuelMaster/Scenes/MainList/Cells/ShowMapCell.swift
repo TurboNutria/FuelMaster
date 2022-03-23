@@ -20,6 +20,10 @@ class ShowMapCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         showMapButton.layer.cornerRadius = showMapButton.frame.height / 2
+        self.showMapButton.layer.borderColor = UIColor(named: "borderColor")!.cgColor
+        self.showMapButton.layer.borderWidth = 1
+        self.selectedBackgroundView?.backgroundColor = .clear
+        selectionStyle = .none
     }
 
     @IBAction func showMapAction(_ sender: Any) {

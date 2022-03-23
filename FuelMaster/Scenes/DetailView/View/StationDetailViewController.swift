@@ -701,11 +701,11 @@ extension StationDetailViewController: detailFooterDelegate {
     }
     
     func tapShare() {
-        let lon = Double((station?.longitude?.replacingOccurrences(of: ",", with: "."))!)!
-        let lat = Double((station?.latitude.replacingOccurrences(of: ",", with: "."))!)!
+        
+        let stationDirection = station?.address?.replacingOccurrences(of: " ", with: "+")
         
         let activityViewController : UIActivityViewController = UIActivityViewController(
-            activityItems: [ NSURL(string: "https://maps.apple.com/?ll\(lat),\(lon)&q=Chincheta")!], applicationActivities: nil)
+            activityItems: [ NSURL(string: "http://maps.apple.com/?q=\(stationDirection!)")!], applicationActivities: nil)
 
         // This lines is for the popover you need to show in iPad
         activityViewController.popoverPresentationController?.sourceView = self.tableView

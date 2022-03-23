@@ -16,7 +16,7 @@ class PriceDetailCell: UICollectionViewCell {
         super.awakeFromNib()
         self.layer.cornerRadius = 20
         self.layer.borderColor = UIColor(named:"borderColor")!.cgColor
-        self.layer.borderWidth = 2.0
+        self.layer.borderWidth = 1.0
 
     }
 

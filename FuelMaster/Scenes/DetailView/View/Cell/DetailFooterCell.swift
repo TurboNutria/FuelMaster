@@ -22,6 +22,8 @@ class DetailFooterCell: UITableViewCell {
     var isAlreadyFav = false 
     
     override func awakeFromNib() {
+        self.selectedBackgroundView?.backgroundColor = .clear
+        selectionStyle = .none
         super.awakeFromNib()
         if let date = UserDefaults.standard.value(forKey: "fecha") as? Date {
             
@@ -38,6 +40,11 @@ class DetailFooterCell: UITableViewCell {
             
             favButton.setTitle("Quitar de favoritos", for: .normal)
         }
+        
+        favButton.layer.borderWidth = 1
+        shareButton.layer.borderWidth = 1
+        shareButton.layer.borderColor = UIColor(named: "borderColor")!.cgColor
+        favButton.layer.borderColor = UIColor(named: "borderColor")!.cgColor
         shareButton.layer.cornerRadius = shareButton.frame.height / 2
         favButton.layer.cornerRadius = favButton.frame.height / 2
     }

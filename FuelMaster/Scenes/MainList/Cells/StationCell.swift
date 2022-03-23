@@ -20,6 +20,8 @@ class StationCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.containerView.layer.cornerRadius = 25
+        self.containerView.layer.borderColor = UIColor(named: "borderColor")!.cgColor
+        self.containerView.layer.borderWidth = 1
         self.ownerImage.layer.cornerRadius = self.ownerImage.layer.frame.height / 2
         self.selectedBackgroundView?.backgroundColor = .clear
         self.selectionStyle = .none

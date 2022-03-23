@@ -26,7 +26,9 @@ class DetailHeaderCell: UITableViewCell {
         mapButton.layer.borderColor = UIColor(named:"borderColor")!.cgColor
         mapButton.layer.cornerRadius = mapButton.frame.height / 2
         self.ownerImage.layer.cornerRadius = self.ownerImage.layer.frame.height / 2
-        mapButton.layer.borderWidth = 2.0
+        mapButton.layer.borderWidth = 1.0
+        self.selectedBackgroundView?.backgroundColor = .clear
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

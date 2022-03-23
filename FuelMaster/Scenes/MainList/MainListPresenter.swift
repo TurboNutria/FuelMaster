@@ -33,17 +33,35 @@ class MainListPresenter: APIManagerOutput {
     func searchText(text: String) {
         let byTownList = self.currentList.filter { data in
             
-            return data.city?.capitalized == text.capitalized
+            if let city = data.city {
+                
+                return city.capitalized.contains(text.capitalized)
+            } else {
+                
+                return false
+            }
         }
         
         let byOwnerList = self.currentList.filter { data in
             
-            return data.owner?.capitalized == text.capitalized
+            if let owner = data.owner {
+                
+                return owner.capitalized.contains(text.capitalized)
+            } else {
+                
+                return false
+            }
         }
         
         let byProvinceList = self.currentList.filter { data in
             
-            return data.province?.capitalized == text.capitalized
+            if let province = data.province {
+                
+                return province.capitalized.contains(text.capitalized)
+            } else {
+                
+                return false 
+            }
         }
         
         let byAddressList = self.currentList.filter { data in
@@ -76,8 +94,16 @@ class MainListPresenter: APIManagerOutput {
     }
     
     func cancelFilter() {
-        
-        self.viewController?.foundData(data: currentList)
+        if let vc = viewController {
+            
+            if vc.isCheap {
+                
+                self.viewController?.foundData(data: self.sortByprice(list: currentList))
+            } else {
+                
+                self.viewController?.foundData(data: self.sortByDistance(list: currentList))
+            }
+        }
     }
     
     func foundData(data: ResponseData?) {
@@ -124,8 +150,16 @@ class MainListPresenter: APIManagerOutput {
                 return data.regularGasPrice! != ""
             }
         }
-        
-        self.viewController?.foundData(data: currentList)
+        if let vc = viewController {
+            
+            if vc.isCheap {
+                
+                self.viewController?.foundData(data: self.sortByprice(list: currentList))
+            } else {
+                
+                self.viewController?.foundData(data: self.sortByDistance(list: currentList))
+            }
+        }
     }
     
     func filterUserDistance(list: [StationData]) -> [StationData] {

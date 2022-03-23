@@ -8,7 +8,7 @@
 import Foundation
 
 enum MapFilterType: String {
-    case cheap = "Baratas"
+    case cheap = "Económicas"
     case regular = "En la media"
     case expensice = "Caras"
     case all = "Todas"

@@ -22,7 +22,7 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztx-Kd-s7t">
                     <rect key="frame" x="156" y="29" width="77" height="31"/>
-                    <color key="tintColor" name="fontColor"/>
+                    <color key="tintColor" name="buttonColor"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Ordenar"/>
                 </button>
@@ -44,6 +44,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="buttonColor">
+            <color red="0.72941176470000002" green="0.72549019609999998" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="fontColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

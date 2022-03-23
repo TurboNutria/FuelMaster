@@ -10,6 +10,8 @@ import CoreLocation
 
 protocol FavListDelegate: AnyObject {
     func tapStation(data: StationData)
+    func presentShareSheet(vc: UIActivityViewController)
+    func updateList()
 }
 
 
@@ -204,6 +206,101 @@ class FavStationCell: UITableViewCell, UICollectionViewDelegate, UICollectionVie
         cell.superGasPrice.text = ""
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        // 1
+        let index = indexPath.row
+        let station = self.stationList![indexPath.row]
+        // 2
+        let identifier = "\(index)" as NSString
+        
+        return UIContextMenuConfiguration(
+          identifier: identifier,
+          previewProvider: nil) { _ in
+            // 3
+              let mapAction: UIAction?
+              if !FavList.shared.stationList.isEmpty {
+                   
+                  if FavList.shared.stationList.contains(where: { data in
+                      data.address == station.address
+                  }) {
+                      
+                      mapAction = UIAction(
+                        title: "Quitar de favoritos",
+                        image: UIImage(systemName: "star.slash"), attributes: .destructive) { _ in
+                            FavList.shared.stationList.removeAll { data in
+                                data.address == station.address
+                            }
+                            
+                            var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                            addedArray.removeAll { element in
+                                return element == Int((station.IDEESS!))!
+                            }
+                            
+                            UserDefaults.standard.set(addedArray, forKey: "favList")
+                            self.delegate?.updateList()
+                        }
+
+                  } else {
+                      
+                       mapAction = UIAction(
+                        title: "Añadir a favoritos",
+                        image: UIImage(systemName: "star")) { _ in
+                            FavList.shared.stationList.append(station)
+                            if UserDefaults.standard.array(forKey: "favList") != nil {
+                                
+                                var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                                addedArray.append(Int((station.IDEESS!))!)
+                                UserDefaults.standard.set(addedArray, forKey: "favList")
+                            } else {
+                                
+                                let idArray: [Int] = [Int((station.IDEESS!))!]
+                                UserDefaults.standard.set(idArray, forKey: "favList")
+                            }
+                            self.delegate?.updateList()
+                      }
+                  }} else {
+                      
+                       mapAction = UIAction(
+                        title: "Añadir a favoritos",
+                        image: UIImage(systemName: "star")) { _ in
+                            FavList.shared.stationList.append(station)
+                            if UserDefaults.standard.array(forKey: "favList") != nil {
+                                
+                                var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                                addedArray.append(Int((station.IDEESS!))!)
+                                UserDefaults.standard.set(addedArray, forKey: "favList")
+                            } else {
+                                
+                                let idArray: [Int] = [Int((station.IDEESS!))!]
+                                UserDefaults.standard.set(idArray, forKey: "favList")
+                            }
+                            self.delegate?.updateList()
+                      }
+                  }
+
+            // 4
+            let shareAction = UIAction(
+              title: "Compartir",
+              image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                  let stationDirection = station.address?.replacingOccurrences(of: " ", with: "+")
+                  let stationDirectionSaned = stationDirection?.replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "Ñ", with: "N")
+                  let activityViewController : UIActivityViewController = UIActivityViewController(
+                      activityItems: [ NSURL(string: "http://maps.apple.com/?q=\(stationDirectionSaned!)")!], applicationActivities: nil)
+
+                  // This lines is for the popover you need to show in iPad
+                  activityViewController.popoverPresentationController?.sourceView = self.collectionView
+
+
+                  // Anything you want to exclude
+
+                  self.delegate?.presentShareSheet(vc: activityViewController)
+              }
+            
+            // 5
+            return UIMenu(title: "", image: nil, children: [mapAction!, shareAction])
+        }
+      }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 320.0, height: 182.0)

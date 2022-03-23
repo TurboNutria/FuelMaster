@@ -16,19 +16,20 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
     var stationsList: [StationData]? = []
     var presenter: MainListPresenter = MainListPresenter()
     var mapView: MapViewController?
+    var isCheap = true
     
     override func viewWillAppear(_ animated: Bool) {
         searchBar.searchBar.placeholder = "Marca, ciudad, dirección..."
         self.navigationItem.searchController = searchBar
         self.tableView.reloadData()
         self.navigationController?.navigationBar.backgroundColor = UIColor(named: "headerColor")
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewDidLoad() {
         self.tableView.setContentOffset(CGPoint(x: 0.0, y: -150.0), animated: false )
         self.navigationController?.navigationBar.backgroundColor = UIColor(named: "headerColor")
-        self.navigationController?.navigationBar.prefersLargeTitles = true 
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
         NotificationCenter.default.addObserver(self, selector: #selector(sortData), name: NSNotification.Name("foundData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sortData), name: NSNotification.Name("refresh"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sortData), name: NSNotification.Name("update"), object: nil)
@@ -94,8 +95,13 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
             header.backgroundView?.backgroundColor = .clear
             return header
         } else {
-            
-            header.titleLabel.text = "Cercanas"
+            if isCheap {
+                
+                header.titleLabel.text = "Económicas"
+            } else {
+                
+                header.titleLabel.text = "Cercanas"
+            }
             header.titleLabel.isHidden = false
             header.sortButton.isHidden = false
             header.backgroundView?.backgroundColor = .clear
@@ -369,6 +375,119 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
             }
         }
     }
+
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = searchBar.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+        if updatedText.count >= 3 {
+            
+            searchData(text: updatedText)
+        } else if updatedText.count == 0 {
+            
+            self.presenter.cancelFilter()
+        }
+        
+        return true
+    }
+    
+    override func tableView(
+      _ tableView: UITableView,
+      contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint)
+        -> UIContextMenuConfiguration? {
+      // 1
+      let index = indexPath.row
+      let station = self.stationsList![indexPath.row]
+      // 2
+      let identifier = "\(index)" as NSString
+      
+      return UIContextMenuConfiguration(
+        identifier: identifier,
+        previewProvider: nil) { _ in
+          // 3
+            let mapAction: UIAction?
+            if !FavList.shared.stationList.isEmpty {
+                 
+                if FavList.shared.stationList.contains(where: { data in
+                    data.address == station.address
+                }) {
+                    mapAction = UIAction(
+                      title: "Quitar de favoritos",
+                      image: UIImage(systemName: "star.slash"), attributes: .destructive) { _ in
+                          FavList.shared.stationList.removeAll { data in
+                              data.address == station.address
+                          }
+                          
+                          var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                          addedArray.removeAll { element in
+                              return element == Int((station.IDEESS!))!
+                          }
+                          
+                          UserDefaults.standard.set(addedArray, forKey: "favList")
+                          self.tableView.reloadData()
+                    }
+
+                } else {
+                    
+                     mapAction = UIAction(
+                      title: "Añadir a favoritos",
+                      image: UIImage(systemName: "star")) { _ in
+                          FavList.shared.stationList.append(station)
+                          if UserDefaults.standard.array(forKey: "favList") != nil {
+                              
+                              var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                              addedArray.append(Int((station.IDEESS!))!)
+                              UserDefaults.standard.set(addedArray, forKey: "favList")
+                          } else {
+                              
+                              let idArray: [Int] = [Int((station.IDEESS!))!]
+                              UserDefaults.standard.set(idArray, forKey: "favList")
+                          }
+                          self.tableView.reloadData()
+                    }
+                }} else {
+                    
+                     mapAction = UIAction(
+                      title: "Añadir a favoritos",
+                      image: UIImage(systemName: "star")) { _ in
+                          FavList.shared.stationList.append(station)
+                          if UserDefaults.standard.array(forKey: "favList") != nil {
+                              
+                              var addedArray = UserDefaults.standard.array(forKey: "favList") as! [Int]
+                              addedArray.append(Int((station.IDEESS!))!)
+                              UserDefaults.standard.set(addedArray, forKey: "favList")
+                          } else {
+                              
+                              let idArray: [Int] = [Int((station.IDEESS!))!]
+                              UserDefaults.standard.set(idArray, forKey: "favList")
+                          }
+                          self.tableView.reloadData()
+                    }
+                }
+
+          // 4
+          let shareAction = UIAction(
+            title: "Compartir",
+            image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                let stationDirection = station.address?.replacingOccurrences(of: " ", with: "+")
+                let stationDirectionSaned = stationDirection?.replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "Ñ", with: "N")
+                let activityViewController : UIActivityViewController = UIActivityViewController(
+                    activityItems: [ NSURL(string: "http://maps.apple.com/?q=\(stationDirectionSaned!)")!], applicationActivities: nil)
+
+                // This lines is for the popover you need to show in iPad
+                activityViewController.popoverPresentationController?.sourceView = self.tableView
+
+
+                // Anything you want to exclude
+
+                self.present(activityViewController, animated: true, completion: nil)
+          }
+          
+          // 5
+          return UIMenu(title: "", image: nil, children: [mapAction!, shareAction])
+      }
+    }
+
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let t = searchBar.text {
@@ -387,6 +506,14 @@ class MainListViewController: UITableViewController, CLLocationManagerDelegate, 
     func searchData(text: String) {
         presenter.searchText(text: text)
     }
+    
+    func updateList() {
+        self.tableView.reloadData()
+    }
+    
+    func presentShareSheet(vc: UIActivityViewController) {
+        self.present(vc, animated: true)
+    }
 }
 
 extension MainListViewController: StationDetialDelegate {
@@ -403,8 +530,10 @@ extension MainListViewController: HeaderProtocol {
     func tapSort(type: SortType) {
         switch type {
         case .distance:
+            self.isCheap = false
             self.reloadOneSection(data: self.presenter.sortByDistance(list: self.stationsList!))
         case .price:
+            self.isCheap = true
             self.reloadOneSection(data: self.presenter.sortByprice(list: self.stationsList!))
         }
     }
