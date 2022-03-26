@@ -15,6 +15,8 @@
 		734F8D9927DCCDD1003F83F9 /* MapFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 734F8D9727DCCDD1003F83F9 /* MapFilterCell.xib */; };
 		73775E5327E26F4A00FFA369 /* TankConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73775E5227E26F4A00FFA369 /* TankConfigurationViewController.swift */; };
 		73775E5527E3561200FFA369 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73775E5427E3561200FFA369 /* AboutViewController.swift */; };
+		73A64C6727EF4856002F8DEC /* DepositCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A64C6527EF4856002F8DEC /* DepositCell.swift */; };
+		73A64C6827EF4856002F8DEC /* DepositCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A64C6627EF4856002F8DEC /* DepositCell.xib */; };
 		73AF3DD72772340F0021D2EB /* SyncStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73AF3DD62772340F0021D2EB /* SyncStoryBoard.storyboard */; };
 		73AF3DD9277234870021D2EB /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AF3DD8277234870021D2EB /* LoadingViewController.swift */; };
 		73AF3DE127733C670021D2EB /* PointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AF3DE027733C670021D2EB /* PointView.swift */; };
@@ -80,6 +82,8 @@
 		734F8D9727DCCDD1003F83F9 /* MapFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFilterCell.xib; sourceTree = "<group>"; };
 		73775E5227E26F4A00FFA369 /* TankConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankConfigurationViewController.swift; sourceTree = "<group>"; };
 		73775E5427E3561200FFA369 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		73A64C6527EF4856002F8DEC /* DepositCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositCell.swift; sourceTree = "<group>"; };
+		73A64C6627EF4856002F8DEC /* DepositCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositCell.xib; sourceTree = "<group>"; };
 		73AF3DD62772340F0021D2EB /* SyncStoryBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SyncStoryBoard.storyboard; sourceTree = "<group>"; };
 		73AF3DD8277234870021D2EB /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		73AF3DE027733C670021D2EB /* PointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointView.swift; sourceTree = "<group>"; };
@@ -399,6 +403,8 @@
 				73BF80FC277A073800C4C146 /* ConfigurationCell.swift */,
 				73BF80FD277A073800C4C146 /* ConfigurationCell.xib */,
 				73775E5227E26F4A00FFA369 /* TankConfigurationViewController.swift */,
+				73A64C6527EF4856002F8DEC /* DepositCell.swift */,
+				73A64C6627EF4856002F8DEC /* DepositCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -494,6 +500,7 @@
 				73BB98E7273AA7A000E686D8 /* DetailFooterCell.xib in Resources */,
 				73BB98582733D76100E686D8 /* LaunchScreen.storyboard in Resources */,
 				73BB98AD2737FA8E00E686D8 /* ListHeaderView.xib in Resources */,
+				73A64C6827EF4856002F8DEC /* DepositCell.xib in Resources */,
 				73BB98552733D76100E686D8 /* Assets.xcassets in Resources */,
 				73AF3DE327733C740021D2EB /* PointView.xib in Resources */,
 				73BB987C2733F18300E686D8 /* StationCell.xib in Resources */,
@@ -521,6 +528,7 @@
 				73BB98742733EAFA00E686D8 /* MainListViewController.swift in Sources */,
 				73BB98662733D8DE00E686D8 /* Constants.swift in Sources */,
 				73BB98632733D8BB00E686D8 /* APIManager.swift in Sources */,
+				73A64C6727EF4856002F8DEC /* DepositCell.swift in Sources */,
 				73BB98D8273AA22100E686D8 /* PriceContainerCell.swift in Sources */,
 				73DC668A27E23D9700E96927 /* GasTypeViewController.swift in Sources */,
 				73BB98B02737FF0100E686D8 /* ShowMapCell.swift in Sources */,
@@ -704,7 +712,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FuelMaster/FuelMaster.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9L854LSJNS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FuelMaster/Info.plist;
@@ -737,7 +745,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FuelMaster/FuelMaster.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9L854LSJNS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FuelMaster/Info.plist;

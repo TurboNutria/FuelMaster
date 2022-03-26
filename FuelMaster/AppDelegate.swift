@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(Date(), forKey: "fecha")
             UserDefaults.standard.set(false, forKey: "regional")
             var priceArray: [Double] = []
-        
+            
             for element in ResponseData.shared.stationList {
                 
                 if let price = element.regularGasPrice,

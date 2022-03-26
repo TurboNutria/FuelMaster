@@ -17,6 +17,8 @@ class ConfigurationDetailViewController: UITableViewController {
     override func viewDidLoad() {
         let nib = UINib(nibName: "ConfigurationCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "ConfigurationCell")
+        let nibTank = UINib(nibName: "DepositCell", bundle: nil)
+        self.tableView.register(nibTank, forCellReuseIdentifier: "DepositCell")
 
         if let gasType = UserDefaults.standard.value(forKey: "gasType") as? String {
             
@@ -31,17 +33,59 @@ class ConfigurationDetailViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return typesList.count
+        if section == 0 {
+            
+            return 1
+        } else {
+         
+            return typesList.count
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            
+            return "Tamaño del depósito"
+        } else {
+            
+            return "Combustible preferido"
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            
+            return 70
+        } else {
+            
+            return tableView.rowHeight
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConfigurationCell", for: indexPath) as? ConfigurationCell
         
-        cell?.typeLabel.text = typesList[indexPath.row].type.rawValue
-        cell?.chevronImage.image = typesList[indexPath.row].selected ? UIImage(systemName: "checkmark") : UIImage(systemName: "")
-        
-        return cell!
+        if indexPath.section == 0 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DepositCell", for: indexPath) as? DepositCell
+            return cell!
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConfigurationCell", for: indexPath) as? ConfigurationCell
+            
+            cell?.typeLabel.text = typesList[indexPath.row].type.rawValue
+            cell?.chevronImage.image = typesList[indexPath.row].selected ? UIImage(systemName: "checkmark") : UIImage(systemName: "")
+            
+            return cell!
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

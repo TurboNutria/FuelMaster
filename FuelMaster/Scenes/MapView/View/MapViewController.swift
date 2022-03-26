@@ -515,16 +515,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
             
             coordinateRegion.span  = MKCoordinateSpan(latitudeDelta: 0.124, longitudeDelta: 0.011)
         }
-      map.setRegion(coordinateRegion, animated: true)
-//        if UserDefaults.standard.value(forKey: "region") != nil {
-//            if UserDefaults.standard.string(forKey: "region") !=                             Constants.currentUserProvince && UserDefaults.standard.string(forKey: "region") != "" {
+      map.setRegion(coordinateRegion, animated: false)
         if centerUpdate {
             
             self.refreshArea()
             centerUpdate = false
         }
-//            }
-//        }
     }
     
     @objc func userPressedLocationButton() {

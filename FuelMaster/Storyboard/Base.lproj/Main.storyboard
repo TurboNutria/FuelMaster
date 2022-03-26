@@ -248,7 +248,7 @@
             </objects>
             <point key="canvasLocation" x="4373" y="-217"/>
         </scene>
-        <!--Combustible-->
+        <!--Mi vehículo-->
         <scene sceneID="8Jl-EW-oi3">
             <objects>
                 <tableViewController id="8sb-o3-3rr" customClass="ConfigurationDetailViewController" customModule="FuelMaster" customModuleProvider="target" sceneMemberID="viewController">
@@ -272,7 +272,7 @@
                             <outlet property="delegate" destination="8sb-o3-3rr" id="YzQ-sm-7t7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Combustible" id="TSW-6x-Ays"/>
+                    <navigationItem key="navigationItem" title="Mi vehículo" id="TSW-6x-Ays"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6Z-rL-a7c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

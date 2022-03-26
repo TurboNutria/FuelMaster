@@ -276,14 +276,6 @@ class APIManager {
                         
                         return false
                     }
-                default:
-                    if priceDouble <= average - 0.06 {
-                        
-                        return true
-                    } else {
-                        
-                        return false
-                    }
                 }
             } else {
                 

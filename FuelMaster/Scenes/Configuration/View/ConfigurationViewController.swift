@@ -16,7 +16,7 @@ class ConfigurationViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,12 +44,8 @@ class ConfigurationViewController: UITableViewController {
         
         if indexPath.section == 0 {
             
-            cell?.typeLabel.text = "Tamaño del depósito"
-        } else if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                
-                cell?.typeLabel.text = "Combustible"
-            }
+            cell?.typeLabel.text = "Mi vehículo"
+
         } else {
             
             cell?.typeLabel.text = "Acerca de"
@@ -62,8 +58,8 @@ class ConfigurationViewController: UITableViewController {
         
         if indexPath.section == 0 {
             
-            self.performSegue(withIdentifier: "tankSegue", sender: nil)
-        } else if indexPath.section == 2 {
+            self.performSegue(withIdentifier: "detailSegue", sender: nil)
+        } else if indexPath.section == 1 {
             
             self.performSegue(withIdentifier: "aboutSegue", sender: nil)
         } else {
