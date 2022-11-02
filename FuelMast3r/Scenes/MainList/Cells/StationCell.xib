@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StationCell" rowHeight="183" id="KGk-i7-Jjw" customClass="StationCell" customModule="FuelMaster" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="569" height="183"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="569" height="183"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9MH-Wd-Jli">
+                        <rect key="frame" x="16" y="20" width="537" height="143"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kXX-My-Xt4">
+                                <rect key="frame" x="16" y="50" width="44" height="43"/>
+                                <color key="tintColor" name="fontColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="TvD-7d-Rbd"/>
+                                    <constraint firstAttribute="height" constant="44" id="s5V-Pt-aBc"/>
+                                </constraints>
+                                <imageReference key="image" image="trash.circle" catalog="system" renderingMode="hierarchical-single">
+                                    <hierarchicalColors>
+                                        <color name="fontColor"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repsol" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqU-mU-R97">
+                                <rect key="frame" x="81" y="18" width="58.5" height="21.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gasolina 98    1,499€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0L-rq-Y0y">
+                                <rect key="frame" x="81" y="109" width="161" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="1,6 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDZ-cc-ShA">
+                                <rect key="frame" x="472" y="18" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eqi-33-ksj">
+                                <rect key="frame" x="81" y="68" width="456" height="1"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="CBR-Mp-QTp"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gasolina 95    1,499€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKY-MA-i2N">
+                                <rect key="frame" x="81" y="80" width="161" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="cellColor"/>
+                        <constraints>
+                            <constraint firstItem="Eqi-33-ksj" firstAttribute="leading" secondItem="rqU-mU-R97" secondAttribute="leading" id="0xp-PM-HVe"/>
+                            <constraint firstItem="kXX-My-Xt4" firstAttribute="leading" secondItem="9MH-Wd-Jli" secondAttribute="leading" constant="16" id="6Mz-3c-xsm"/>
+                            <constraint firstItem="rqU-mU-R97" firstAttribute="top" secondItem="9MH-Wd-Jli" secondAttribute="top" constant="18" id="8qf-jy-SBj"/>
+                            <constraint firstItem="rqU-mU-R97" firstAttribute="leading" secondItem="kXX-My-Xt4" secondAttribute="trailing" constant="21" id="HHV-aI-BvQ"/>
+                            <constraint firstItem="G0L-rq-Y0y" firstAttribute="top" secondItem="QKY-MA-i2N" secondAttribute="bottom" constant="8" symbolic="YES" id="Hip-hC-YRe"/>
+                            <constraint firstItem="kXX-My-Xt4" firstAttribute="centerY" secondItem="9MH-Wd-Jli" secondAttribute="centerY" id="KPf-jc-Pia"/>
+                            <constraint firstItem="QKY-MA-i2N" firstAttribute="leading" secondItem="rqU-mU-R97" secondAttribute="leading" id="OgN-x6-TBx"/>
+                            <constraint firstItem="vDZ-cc-ShA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rqU-mU-R97" secondAttribute="trailing" constant="15" id="WSp-as-W2g"/>
+                            <constraint firstAttribute="trailing" secondItem="vDZ-cc-ShA" secondAttribute="trailing" constant="16" id="agx-ir-Cee"/>
+                            <constraint firstItem="QKY-MA-i2N" firstAttribute="top" secondItem="Eqi-33-ksj" secondAttribute="bottom" constant="11" id="cwl-RV-WXE"/>
+                            <constraint firstAttribute="trailing" secondItem="Eqi-33-ksj" secondAttribute="trailing" id="gVk-iE-WE8"/>
+                            <constraint firstAttribute="bottom" secondItem="G0L-rq-Y0y" secondAttribute="bottom" constant="13" id="h8E-CG-gdv"/>
+                            <constraint firstItem="vDZ-cc-ShA" firstAttribute="top" secondItem="9MH-Wd-Jli" secondAttribute="top" constant="18" id="i9S-gq-2sh"/>
+                            <constraint firstItem="G0L-rq-Y0y" firstAttribute="leading" secondItem="rqU-mU-R97" secondAttribute="leading" id="iW8-sb-r5s"/>
+                            <constraint firstItem="Eqi-33-ksj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rqU-mU-R97" secondAttribute="bottom" constant="20" id="noH-69-yQv"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="9MH-Wd-Jli" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Jyl-YD-RW9"/>
+                    <constraint firstItem="9MH-Wd-Jli" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="JzH-yV-IJ9"/>
+                    <constraint firstAttribute="trailing" secondItem="9MH-Wd-Jli" secondAttribute="trailing" constant="16" id="MKU-nu-iqB"/>
+                    <constraint firstAttribute="bottom" secondItem="9MH-Wd-Jli" secondAttribute="bottom" constant="20" id="yE8-c9-EzP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="containerView" destination="9MH-Wd-Jli" id="z1J-Xj-kRN"/>
+                <outlet property="distanceLabel" destination="vDZ-cc-ShA" id="sqC-4a-rJN"/>
+                <outlet property="ownerImage" destination="kXX-My-Xt4" id="qVp-7n-zJe"/>
+                <outlet property="regularGasLabel" destination="QKY-MA-i2N" id="uNw-Fv-gOA"/>
+                <outlet property="separatorView" destination="Eqi-33-ksj" id="8cn-8x-qkW"/>
+                <outlet property="stationName" destination="rqU-mU-R97" id="kYB-BP-8Kz"/>
+                <outlet property="superGasLabel" destination="G0L-rq-Y0y" id="wKZ-19-Kfg"/>
+            </connections>
+            <point key="canvasLocation" x="306.52173913043481" y="147.65625"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="trash.circle" catalog="system" width="128" height="121"/>
+        <namedColor name="cellColor">
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="fontColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

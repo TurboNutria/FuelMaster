@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ListHeaderView" customModule="FuelMaster" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="244" height="89"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEr-8h-dmV">
+                    <rect key="frame" x="34" y="31.333333333333336" width="56" height="26.333333333333336"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                    <color key="textColor" name="fontColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztx-Kd-s7t">
+                    <rect key="frame" x="156" y="29" width="77" height="31"/>
+                    <color key="tintColor" name="buttonColor"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Ordenar"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ztx-Kd-s7t" secondAttribute="trailing" constant="11" id="0Ix-Fw-OcP"/>
+                <constraint firstItem="ztx-Kd-s7t" firstAttribute="centerY" secondItem="aEr-8h-dmV" secondAttribute="centerY" id="Wp2-kS-Tej"/>
+                <constraint firstItem="aEr-8h-dmV" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="X7c-6A-NSf"/>
+                <constraint firstItem="aEr-8h-dmV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="ZaJ-Pc-kfq"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="sortButton" destination="ztx-Kd-s7t" id="Lbr-Jk-FZA"/>
+                <outlet property="titleLabel" destination="aEr-8h-dmV" id="GAo-Bd-Dsu"/>
+            </connections>
+            <point key="canvasLocation" x="14.492753623188406" y="-151.22282608695653"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="buttonColor">
+            <color red="0.72941176470000002" green="0.72549019609999998" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="fontColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
