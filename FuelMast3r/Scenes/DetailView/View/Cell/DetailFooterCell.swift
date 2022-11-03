@@ -28,7 +28,7 @@ class DetailFooterCell: UITableViewCell {
         if let date = UserDefaults.standard.value(forKey: "fecha") as? Date {
             
             let currentDate = date
-            let dateFormatted = currentDate.formatted(date: .long, time: .shortened)
+            let dateFormatted = currentDate.formatted(date: .abbreviated, time: .shortened)
             self.disclaimerLabel.text = "Datos obtenidos el día \(dateFormatted)"
         } else {
             

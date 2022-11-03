@@ -1,0 +1,96 @@
+
+/* Class = "UILabel"; text = "Hecha con orgullo 🏳️‍⚧️🏳️‍🌈 "; ObjectID = "0S1-9d-fxP"; */
+"0S1-9d-fxP.text" = "Hecha con orgullo 🏳️‍⚧️🏳️‍🌈 ";
+
+/* Class = "UIButton"; configuration.title = "€"; ObjectID = "0k3-QE-U1e"; */
+"0k3-QE-U1e.configuration.title" = "€";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "0k3-QE-U1e"; */
+"0k3-QE-U1e.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "FuelMaster"; ObjectID = "4uA-Nm-XPd"; */
+"4uA-Nm-XPd.text" = "FuelMaster";
+
+/* Class = "UIBarButtonItem"; title = "Cerrar"; ObjectID = "5Qx-vS-D9W"; */
+"5Qx-vS-D9W.title" = "Cerrar";
+
+/* Class = "UIViewController"; title = "Gasolineras"; ObjectID = "8MD-uL-uxx"; */
+"8MD-uL-uxx.title" = "Gasolineras";
+
+/* Class = "UILabel"; text = "1,100€"; ObjectID = "F1C-06-xsg"; */
+"F1C-06-xsg.text" = "1,100€";
+
+/* Class = "UINavigationItem"; title = "Configuración"; ObjectID = "J9t-Kx-Da3"; */
+"J9t-Kx-Da3.title" = "Configuración";
+
+/* Class = "UIBarButtonItem"; title = "Guardar"; ObjectID = "KhB-6A-vqX"; */
+"KhB-6A-vqX.title" = "Guardar";
+
+/* Class = "UISearchBar"; placeholder = "Shell, Respol, Ballenoil..."; ObjectID = "QPV-FX-vH2"; */
+"QPV-FX-vH2.placeholder" = "Shell, Respol, Ballenoil...";
+
+/* Class = "UISearchBar"; QPV-FX-vH2.scopeButtonTitles[0] = "Title"; ObjectID = "QPV-FX-vH2"; */
+"QPV-FX-vH2.scopeButtonTitles[0]" = "Title";
+
+/* Class = "UISearchBar"; QPV-FX-vH2.scopeButtonTitles[1] = "Title"; ObjectID = "QPV-FX-vH2"; */
+"QPV-FX-vH2.scopeButtonTitles[1]" = "Title";
+
+/* Class = "UINavigationItem"; title = "Mi vehículo"; ObjectID = "TSW-6x-Ays"; */
+"TSW-6x-Ays.title" = "Mi vehículo";
+
+/* Class = "UIBarButtonItem"; title = "Cerrar"; ObjectID = "ThQ-Bn-Tko"; */
+"ThQ-Bn-Tko.title" = "Cerrar";
+
+/* Class = "UILabel"; text = "1,300€"; ObjectID = "UmK-YU-4vW"; */
+"UmK-YU-4vW.text" = "1,300€";
+
+/* Class = "UILabel"; text = "l"; ObjectID = "V0p-yU-zID"; */
+"V0p-yU-zID.text" = "l";
+
+/* Class = "UILabel"; text = "Después"; ObjectID = "Whu-Dj-kaY"; */
+"Whu-Dj-kaY.text" = "Después";
+
+/* Class = "UILabel"; text = "Ejemplo"; ObjectID = "YP3-mB-Ugc"; */
+"YP3-mB-Ugc.text" = "Ejemplo";
+
+/* Class = "UIButton"; configuration.title = "%"; ObjectID = "ZSf-dQ-hna"; */
+"ZSf-dQ-hna.configuration.title" = "%";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ZSf-dQ-hna"; */
+"ZSf-dQ-hna.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Listado"; ObjectID = "a8B-0F-hwM"; */
+"a8B-0F-hwM.title" = "Listado";
+
+/* Class = "UILabel"; text = "Versión 1.0 (12)"; ObjectID = "cg1-Pw-aeA"; */
+"cg1-Pw-aeA.text" = "Versión 1.0 (12)";
+
+/* Class = "UILabel"; text = "Antes"; ObjectID = "fDH-gr-cWe"; */
+"fDH-gr-cWe.text" = "Antes";
+
+/* Class = "UITextField"; placeholder = "40"; ObjectID = "jxn-30-ONY"; */
+"jxn-30-ONY.placeholder" = "40";
+
+/* Class = "UILabel"; text = "Tamaño del depósito"; ObjectID = "kiQ-Ku-Y8R"; */
+"kiQ-Ku-Y8R.text" = "Tamaño del depósito";
+
+/* Class = "UINavigationItem"; title = "Depósito"; ObjectID = "mRb-Cp-BVn"; */
+"mRb-Cp-BVn.title" = "Depósito";
+
+/* Class = "UILabel"; text = "Toda la información mostrada en esta app es obtenida del Ministerio de Industria, Comercio y Tursmo."; ObjectID = "peU-MA-hgY"; */
+"peU-MA-hgY.text" = "Toda la información mostrada en esta app es obtenida del Ministerio de Industria, Comercio y Tursmo.";
+
+/* Class = "UIBarButtonItem"; title = "Cerrar"; ObjectID = "rHC-oI-xuY"; */
+"rHC-oI-xuY.title" = "Cerrar";
+
+/* Class = "UINavigationItem"; title = "Filtros"; ObjectID = "xeG-D0-X32"; */
+"xeG-D0-X32.title" = "Filtros";
+
+/* Class = "UINavigationItem"; title = "Acerca de"; ObjectID = "xz9-zs-ZzO"; */
+"xz9-zs-ZzO.title" = "Acerca de";
+
+/* Class = "UINavigationItem"; title = "Repsol"; ObjectID = "yXr-H8-bmZ"; */
+"yXr-H8-bmZ.title" = "Repsol";
+
+/* Class = "UILabel"; text = "Selecciona el tipo de descuento"; ObjectID = "zr1-Zj-Xoa"; */
+"zr1-Zj-Xoa.text" = "Selecciona el tipo de descuento";
