@@ -44,8 +44,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
         NotificationCenter.default.addObserver(self, selector: #selector(setOnboarding), name: NSNotification.Name("onboarding"), object: nil)
         let navButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), landscapeImagePhone: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(filterAction))
         self.navigationItem.rightBarButtonItem = navButton
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapOutside))
-//        self.map.addGestureRecognizer(tap)
         self.map.showsUserLocation = true
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -199,13 +197,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
     
     @objc func tapOutside() {
         self.map.deselectAnnotation(self.selectedPin?.annotation, animated: true)
-//        self.dismissDetailSheet()
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let annotation = view.annotation,
-           let title = annotation.title {
-            if !(title == "My Location") {
+        if let annotation = view.annotation {
+            if annotation.coordinate.latitude != self.locationManager?.location?.coordinate.latitude &&
+                annotation.coordinate.longitude != self.locationManager?.location?.coordinate.longitude {
                 
                 if UIDevice.current.userInterfaceIdiom != .pad {
                     
@@ -414,7 +411,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, StationDetialDeleg
                 
                 annotationView?.markerTintColor = UIColor.gray
             }
-        if annotation.title == "My Location" {
+        
+        //Not what I intended, should replace it with a location based check
+        if annotation.title == "Mi ubicación" || annotation.title == "My Location" {
             print("user location found")
             annotationView = nil
         }
